@@ -4,7 +4,7 @@ import style from "./footer.module.css"
 export default function Footer(){
     return(
         <div className={style.planta}>
-            <img src={footer} alt="" />
+            <img src={footer} style={{ position: 'relative',  top: '20px' }}alt="" />
         </div>
     )
 }

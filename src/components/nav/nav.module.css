@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
 .nav {
     display: flex;
     justify-content: center;
@@ -10,8 +12,8 @@ a {
     color: rgba(39, 18, 2, 1);
     width: 220px;
     height: 60px;
-    font-family: Poppins;
-    font-size: 30px;
+    font-family: 'Poppins';
+    font-size: 25px;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
     font-weight: bold;
 }
@@ -21,8 +23,9 @@ a {
 }
 
 .buscador img {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
+    
 }
 
 .search {
@@ -53,4 +56,86 @@ img {
     width: 60px;
     margin-bottom: 15px;
     
+}
+.menuToggle {
+    display: none; /* Ocultar el ícono de menú por defecto */
+    cursor: pointer;
+}
+
+.menu {
+    display: none; /* Ocultar el menú principal en dispositivos móviles */
+    
+}
+
+.menuOpen {
+    display: flex; 
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 70%;
+    max-width: 250px; /* Ancho máximo del menú */
+    background-color: white;
+    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.3);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 9;
+}
+
+.closeIcon {
+    align-self: flex-end;
+    margin: 10px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .nav {
+        display: none; /* Ocultar el menú horizontal en dispositivos móviles */
+    }
+
+    .buscador {
+        display: none; /* Ocultar el buscador en dispositivos móviles */
+    }
+
+    .menuToggle {
+        display: flex; /* Mostrar el ícono de menú en dispositivos móviles */
+        justify-content: center;
+        align-items: center;
+        gap: 30vw;
+        width: 60px;
+        height: auto;
+        font-size: 30px;
+    }
+
+    .menuOpen {
+        transform: translateX(0); /* Deslizar el menú desde la izquierda cuando está abierto */
+    }
+    .user button{
+        display: flex;
+        border: none;
+        background-color: white;
+    }
+    
+    .user img {
+        display: flex;
+        width: 60px;
+        position: absolute;
+        bottom: 1vh;
+    }
+    
+    .profileContainer {
+    display: none;
+}
+
+/* Estilos para el contenedor del perfil en dispositivos móviles */
+.profileContainerMovil {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom:9.5vh; 
+    left: 10px;
+}
 }
