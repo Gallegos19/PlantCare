@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
 .card {
     display: flex;
     flex-direction: column;
@@ -5,9 +7,9 @@
     align-items: center;
     width: 200px;
     border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    margin: 10px;
+    border-radius: 10px;  
+    padding: 20px;  
+    margin: 20px;  
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -18,8 +20,9 @@
 }
 
 .name {
-    font-family: Poppins, sans-serif;
-    font-size: 18px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;  
+    font-weight: bold;
     color: rgba(39, 18, 2, 1);
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
@@ -39,4 +42,11 @@
 .plus {
     width: 25px;
     height: 25px;
+}
+
+.cardList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;  
+    gap: 20px; 
 }
