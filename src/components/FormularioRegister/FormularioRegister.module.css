@@ -1,0 +1,28 @@
+.containerForm{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    gap: 0.5em;
+}
+.text{
+    display: flex;
+    width: 15vw;
+    text-align: center;
+    color: #125203;
+    cursor: pointer;
+
+}
+.link{
+    display: flex;
+    width: 15vw;
+    text-align: center;
+    color: #125203;
+    cursor: pointer;
+    text-decoration: none;
+}
+@media (max-width: 768px) {
+    .text{
+        width: 35vw;
+    }
+}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Style from './Input.module.css';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { Snackbar, Alert } from '@mui/material';
@@ -18,7 +18,7 @@ export default function Input(props) {
 
   const handleBlur = () => {
     let valid = false;
-    if (texto.toLowerCase() === "usuario") {
+    if (texto.toLowerCase() === "correo") {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       valid = emailRegex.test(value);
       if (!valid) {
@@ -49,7 +49,7 @@ export default function Input(props) {
   let inputType;
   if (texto.toLowerCase() === "contraseña") {
     inputType = showPassword ? "text" : "password";
-  } else if (texto.toLowerCase() === "usuario") {
+  } else if (texto.toLowerCase() === "correo") {
     inputType = 'email';
   } else {
     inputType = type || 'text';

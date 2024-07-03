@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import CabeceraTitle from '../../components/CabeceraTitle/CabeceraTitle';
 import JardinVertical from '../../components/JardinVertical/JardinVertical';
 import FormularioLogin from '../../components/FormularioLogin/FormularioLogin';
