@@ -1,0 +1,16 @@
+.containerCabecera{
+    display: flex;
+    width: 100%;
+    height: auto;
+    margin: 0;
+}
+.containerCabecera h2{
+    width: 100%;
+    margin: 5vh;
+    padding: 2vh;
+    text-align: center;
+    color: #1C7E04;
+    font-weight: 450;
+    text-shadow: 1px 0 1px #352f2f;
+    font-size: 2em;
+}
