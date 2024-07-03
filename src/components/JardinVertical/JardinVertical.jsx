@@ -1,4 +1,4 @@
-import React from 'react'
+
 import style from './Jardin.module.css'
 import Muro from '../../assets/muroPlantas.jpg'
 export default function JardinVertical() {

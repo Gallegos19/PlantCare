@@ -1,12 +1,14 @@
 import { useState, forwardRef, useImperativeHandle } from 'react';
 import Input from '../Input/Input';
 import Button from '../Button/Button';
-import Style from './FormularioLogin.module.css';
+import Style from './FormularioRegister.module.css';
 import { useNavigate } from 'react-router-dom';
 import { Snackbar, Alert } from '@mui/material';
 
-const FormularioLogin = forwardRef((props, ref) => {
+const FormularioRegister = forwardRef((props, ref) => {
   const [username, setUsername] = useState('');
+  const [nombre, setNombre] = useState('');
+  const [apellido, setApellido] = useState('');
   const [contrasena, setContrasena] = useState('');
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
@@ -15,7 +17,7 @@ const FormularioLogin = forwardRef((props, ref) => {
   // Permite que el padre acceda al ref del formulario
   useImperativeHandle(ref, () => ({
     scrollIntoView: () => {
-      const formElement = document.getElementById("formulario-login");
+      const formElement = document.getElementById("formulario-Register");
       if (formElement) {
         formElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
@@ -24,8 +26,8 @@ const FormularioLogin = forwardRef((props, ref) => {
 
   const handleEntrar = () => {
     // Validar que ambos campos estén llenos
-    if (username.trim() !== '' && contrasena.trim() !== '') {
-      navigate('/');
+    if (username.trim() !== '' && contrasena.trim() !== '' && nombre.trim() !== '' && apellido.trim() !== '') {
+      navigate('/login');
     } else {
       setAlertMessage('Por favor, completa todos los campos.');
       setAlertOpen(true);
@@ -40,7 +42,19 @@ const FormularioLogin = forwardRef((props, ref) => {
   };
 
   return (
-    <div id="formulario-login" className={Style.containerForm}>
+    <div id="formulario-Register" className={Style.containerForm}>
+      <Input
+        texto="Nombre"
+        type="text"
+        value={nombre}
+        onChange={(newValue) => setNombre(newValue)}
+      />
+      <Input
+        texto="Apellido"
+        type="text"
+        value={apellido}
+        onChange={(newValue) => setApellido(newValue)}
+      />
       <Input
         texto="Correo"
         type="email"
@@ -55,13 +69,13 @@ const FormularioLogin = forwardRef((props, ref) => {
       />
 
         <div onClick={handleEntrar} >
-        <Button title='Entrar'/>
+        <Button title='Registrar'/>
         </div>
      
 
-      <div onClick={() => navigate('/register')}>
+      <div onClick={() => navigate('/login')}>
         <p className={Style.text}>
-          ¿Aún no estás registrado? Regístrate aquí
+          ¿Ya tienes cuenta? inicia sesión aquí
         </p>
       </div>
 
@@ -74,4 +88,4 @@ const FormularioLogin = forwardRef((props, ref) => {
   );
 });
 
-export default FormularioLogin;
+export default FormularioRegister;
