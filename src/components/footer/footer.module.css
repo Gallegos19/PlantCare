@@ -1,0 +1,8 @@
+.planta{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.planta img{
+    width: 100px;
+}
