@@ -1,5 +1,3 @@
-// Dentro de tu componente Nav.js
-
 import React, { useState } from "react";
 import style from "./nav.module.css";
 import { HiMenu } from "react-icons/hi";
