@@ -1,0 +1,58 @@
+.containerForm{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    align-items: center;
+    gap: 0.5em;
+}
+.containerInputs{
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+    align-items: center;
+    width: 100%;
+}
+.groups{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 50%;
+}
+.text{
+    display: flex;
+    width: 15vw;
+    text-align: center;
+    color: #125203;
+    cursor: pointer;
+
+}
+.link{
+    display: flex;
+    width: 15vw;
+    text-align: center;
+    color: #125203;
+    cursor: pointer;
+    text-decoration: none;
+}
+@media (max-width: 768px) {
+    .text{
+        width: 35vw;
+    }
+    .containerForm{
+        width: 100%;
+    }
+    .containerInputs{
+        flex-direction: column;
+    }
+    .groups{
+        width: 100%;
+    }
+}
+@media only screen and (min-width: 769px) and (max-width: 1080px) {
+    .groups{
+        width: 100%;
+    }
+    .containerForm{
+        width: 100%;
+    }
+  }

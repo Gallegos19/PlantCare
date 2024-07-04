@@ -1,0 +1,45 @@
+.containerAgregar{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+}
+.containerSectionAdd{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    padding: 5vh;
+}
+h2{
+    font-family: 'Poppins', sans-serif;
+}
+.containerFormulario{
+    display: flex;
+    flex-direction: row;
+    padding: 2vh;
+    margin: 2vw;
+    width: 100%;
+    gap: 10em;
+    height: auto;
+}
+@media (max-width: 768px) {
+ .containerFormulario{
+    flex-direction: column-reverse;
+    gap: 2em;
+    padding: 0;
+ }
+ .containerSectionAdd{
+    padding: 0;
+ }
+ h2{
+    margin-left: 2em;
+ }
+}
+@media only screen and (min-width: 769px) and (max-width: 980px) {
+    .containerFormulario{
+        flex-direction: column-reverse;
+        gap: 2em;
+        padding: 0;
+     }
+  }
+  
