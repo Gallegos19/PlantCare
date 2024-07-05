@@ -15,9 +15,9 @@ const plants = [
 
 export default function Home() {
     return (
-        <div>
+        <div className={style.container}>
             <Nav />
-            <div className={style.container}>
+            <div>
                 <div className={style.header}>
                     <h1 className={style.Jardin}>Mi Jardin</h1>
                     <div className={style.selectContainer}>
