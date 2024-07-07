@@ -1,0 +1,244 @@
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+}
+
+.container2 {
+    display: flex;
+    gap: 20vw;
+}
+
+.plantInfo {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 80vw;
+    height: auto;
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    
+}
+
+.plantImage {
+    width: 20vw;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 24px;
+    color: #333333;
+    margin-bottom: 20px;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 10px;
+}
+
+.circulo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 10vw;
+    height: 20vh;
+    border: 2px solid #4CAF50;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.circulo span {
+    font-size: 18px;
+    color: #333333;
+    margin-top: 5px;
+}
+
+.icono {
+    width: 30px;
+    height: 30px;
+}
+
+.calendar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5vh;
+}
+
+.calendar img {
+    margin: 0 10px;
+    cursor: pointer; 
+}
+.calendarDay {
+    margin: 0 10px;
+    color: #2F4F2F; 
+}
+
+.today {
+    font-weight: bold;
+    color: #2F4F2F; 
+}
+
+.nextPageLeft {
+    transform: scaleX(-1); 
+}
+
+.nextPageRight {
+    margin-left: auto; 
+}
+
+.nextPageUp {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.nextPageUp img {
+   
+    cursor: pointer; 
+    transition: transform 0.3s ease; 
+}
+
+.nextPageUp img.closed {
+    transform: rotate(360deg); 
+}
+
+
+.nextPage {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.porcentajeAgua {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 15vw;
+    height: 9vh;
+    border: 3px solid rgba(22.385117523372173, 91.78669676184654, 6.119113275781274, 1);
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+button {
+    background-color: #155904;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+button:active {
+    background-color: #3e8e41;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .plantInfo {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 85vw;
+        height: auto;
+    }
+    .plantImage {
+        width: 30vw;
+    }
+    .circulo {
+        width: 18vw;
+        height: 15vh;
+    }
+    .icono {
+        width: 50px;
+        height: 50px;
+    }
+    .porcentajeAgua {
+        width: 25vw;
+        height: 9vh; 
+    }
+    .porcentajeAgua h3{
+        font-size: 1rem;
+    }
+    .container2 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 40vw;
+    }
+    .calendarIcon{
+        width: 50px;
+    }
+    .calendar img {
+      width: 40px;
+    }
+}
+
+
+@media (max-width: 768px) {
+   
+    .plantInfo {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 75vw;
+        height: auto;
+    }
+
+    .plantImage {
+        width: 50vw;
+    }
+    
+
+    .stats {
+        display: flex;
+        justify-content: space-around;
+        flex-direction: column;
+       
+    }
+    .circulo {   
+        width: 50vw;
+        height: 25vh
+    }
+    .icono {
+        width: 50px;
+        height: 50px;
+    }
+    .porcentajeAgua {
+        width: 25vw;
+        height: 9vh; 
+    }
+    .porcentajeAgua h3{
+        font-size: 1rem;
+    }
+
+    .calendarIcon{
+        width: 40px;
+    }
+    .calendar img {
+      width: 30px;
+    }
+}
