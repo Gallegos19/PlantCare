@@ -1,0 +1,31 @@
+/* Estilos CSS */
+.cardList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.containerGraph {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+   
+}
+
+.graphsContainer {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 60vw;
+}
+
+.closeButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #333;
+}

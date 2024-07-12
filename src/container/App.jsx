@@ -6,7 +6,8 @@ import Login from '../pages/Login/Login';
 import Register from '../pages/Register/Register';
 import SpecificPlant from '../pages/SpecificPlant/specificPlant';
 import AgregarPlanta from '../pages/AgregarPlanta/AgregarPlanta';
-
+import Graph from '../pages/Graph/Graph';
+import SpecificGraph from '../pages/SpecificGraph/specificGraph';
 function App() {
 
   return (
@@ -14,6 +15,8 @@ function App() {
    <Routes>
     <Route path='/' element={<Home/>}/>
     <Route path='/specific/:plantName' element={<SpecificPlant />} />
+    <Route path='/graph' element={<Graph/>} />
+    <Route path='/specificGraph/' element={<SpecificGraph/>} />
     <Route path="/login" element={<Login/>} />
     <Route path="/register" element={<Register/>} />
     <Route path="/agregarplanta" element={<AgregarPlanta/>} />
