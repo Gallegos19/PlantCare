@@ -1,0 +1,30 @@
+.graphList {
+    display: flex;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+
+.graphList > div {
+    cursor: pointer;
+    background: #fff;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+    width: 20vw;
+}
+
+.graphList > div:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+h3 {
+    margin-bottom: 16px;
+    font-size: 1.2rem;
+    color: #333;
+}
