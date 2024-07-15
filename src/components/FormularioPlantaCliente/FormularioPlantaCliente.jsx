@@ -2,21 +2,21 @@ import { useState, forwardRef, useImperativeHandle } from "react";
 import Input from "../Input/Input";
 import Input2 from "../Input/Input2";
 import Button from "../Button/Button";
-import Style from "./FormularioPlanta.module.css";
+import Style from "./FormularioPlantaCliente.module.css";
 import { useNavigate } from "react-router-dom";
 import { Snackbar, Alert } from "@mui/material";
 
-const FormularioPlanta = forwardRef((props, ref) => {
-    const [nombreCientifico, setnombreCientifico] = useState("");
-    const [nombre, setNombre] = useState("");
-    const [categoria, setcategoria] = useState("");
-    const [familia, setfamilia] = useState("");
-    const [tipo, setTipo] = useState('');
-    const [temperaturaTierra, setTemperaturaTierra] = useState('')
-    const [humedadTierra, setHumedadTierra] = useState('')
-    const [luz, setLuz] = useState('')
-    const [temperatura, setTemperatura] = useState('')
-    const [gas, setGas] = useState('')
+const FormularioPlantaCliente = forwardRef((props, ref) => {
+  const [nombreCientifico, setnombreCientifico] = useState("");
+  const [nombre, setNombre] = useState("");
+  const [categoria, setcategoria] = useState("");
+  const [familia, setfamilia] = useState("");
+  const [tipo, setTipo] = useState('');
+  const [temperaturaTierra, setTemperaturaTierra] = useState('')
+  const [humedadTierra, setHumedadTierra] = useState('')
+  const [luz, setLuz] = useState('')
+  const [temperatura, setTemperatura] = useState('')
+  const [gas, setGas] = useState('')
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ const FormularioPlanta = forwardRef((props, ref) => {
   // Permite que el padre acceda al ref del formulario
   useImperativeHandle(ref, () => ({
     scrollIntoView: () => {
-      const formElement = document.getElementById("formulario-Planta");
+      const formElement = document.getElementById("formulario-PlantaCliente");
       if (formElement) {
         formElement.scrollIntoView({ behavior: "smooth", block: "start" });
       }
@@ -34,10 +34,10 @@ const FormularioPlanta = forwardRef((props, ref) => {
   const handleEntrar = () => {
     // Validar que ambos campos estén llenos
     if (
-      username.trim() !== "" &&
-      contrasena.trim() !== "" &&
+      nombreCientifico.trim() !== "" &&
+      familia.trim() !== "" &&
       nombre.trim() !== "" &&
-      apellido.trim() !== ""
+      categoria.trim() !== ""
     ) {
       navigate("/login");
     } else {
@@ -54,20 +54,20 @@ const FormularioPlanta = forwardRef((props, ref) => {
   };
 
   return (
-    <div id="formulario-Planta" className={Style.containerForm}>
+    <div id="formulario-PlantaCliente" className={Style.containerForm}>
       <div className={Style.containerInputs}>
-      <div className={Style.groups}>
-          <Input
+        <div className={Style.groups}>
+          <Input2
             texto="Nombre"
             type="text"
             value={nombre}
+            options={["Opción 1", "Opción 2", "Opción 3"]}
             onChange={(newValue) => setNombre(newValue)}
           />
-          <Input2
-            texto="Categoria"
+          <Input
+            texto="categoria"
             type="text"
             value={categoria}
-            options={["Opción 1", "Opción 2", "Opción 3"]}
             onChange={(newValue) => setcategoria(newValue)}
           />
           <Input
@@ -82,20 +82,18 @@ const FormularioPlanta = forwardRef((props, ref) => {
             value={familia}
             onChange={(newValue) => setfamilia(newValue)}
           />
-          <Input2
+          <Input
             texto="Gas"
             type="text"
             value={gas}
-            options={["Opción 1", "Opción 2", "Opción 3"]}
             onChange={(newValue) => setGas(newValue)}
           />
         </div>
         <div className={Style.groups}>
-          <Input2
+          <Input
             texto="Tipo"
             type="text"
             value={tipo}
-            options={["de Sol", "de Sombra"]}
             onChange={(newValue) => setTipo(newValue)}
           />
           <Input
@@ -136,4 +134,4 @@ const FormularioPlanta = forwardRef((props, ref) => {
   );
 });
 
-export default FormularioPlanta;
+export default FormularioPlantaCliente;

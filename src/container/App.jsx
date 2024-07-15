@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import reactLogo from '../assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect, useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import '../App.css'
 import Home from '../pages/Home/Home';
 import Login from '../pages/Login/Login';
 import Register from '../pages/Register/Register';
 import AgregarPlanta from '../pages/AgregarPlanta/AgregarPlanta';
+import AgregarPlantaAdmin from '../pages/AgregarPlantaAdmin/AgregarPlantaAdmin';
 
 function App() {
 
@@ -17,6 +16,7 @@ function App() {
     <Route path="/login" element={<Login/>} />
     <Route path="/register" element={<Register/>} />
     <Route path="/agregarplanta" element={<AgregarPlanta/>} />
+    <Route path="/agregarplantaadmin" element={<AgregarPlantaAdmin/>} />
     
    </Routes>
    </BrowserRouter>

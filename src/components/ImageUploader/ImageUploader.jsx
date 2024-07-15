@@ -3,9 +3,12 @@ import { useState } from 'react';
 import Style from './ImageUploader.module.css';
 import placeholderImage from '../../assets/fondopixel.png'; // Asegúrate de tener una imagen placeholder en tu proyecto
 
-function ImageUploader() {
+function ImageUploader(props) {
   const [selectedImage, setSelectedImage] = useState(null);
 
+  let bandera = props.bandera;
+  
+  console.log(bandera);
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     setSelectedImage(file);
@@ -18,7 +21,9 @@ function ImageUploader() {
         alt="Uploaded"
         className={Style.image}
       />
-      <input type="file" onChange={handleImageChange} />
+      {bandera === 'true' ? <input type="file" onChange={handleImageChange} /> : null}
+
+      
     </div>
   );
 }

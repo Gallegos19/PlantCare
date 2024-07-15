@@ -5,10 +5,12 @@ import search from "../../assets/google_web_search.png";
 import user from "../../assets/male_user.png";
 import plus from "../../assets/plus.png";
 import ProfileCard from "../user/user";
+import { useNavigate } from "react-router-dom";
 
 export default function Nav() {
     const [showProfile, setShowProfile] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const navigate = useNavigate();
 
     const toggleProfile = () => {
         setShowProfile(!showProfile);
@@ -29,10 +31,10 @@ export default function Nav() {
                     <img src={search} style={{ position: 'relative', cursor: 'pointer', right: '5px', bottom: '4px' }} alt="Buscar" />
                 </div>
 
-                <a>Inicio</a>
-                <a>Gráficas</a>
-                <a>Datos</a>
-                <a>Añadir <img src={plus} alt="Añadir" /></a>
+                <a onClick={() => navigate('/')}>Inicio</a>
+                <a onClick={() => navigate('/')}>Gráficas</a>
+                <a onClick={() => navigate('/')}>Datos</a>
+                <a onClick={() => navigate('/agregarplanta')}>Añadir <img src={plus} alt="Añadir" /></a>
 
                 <div className={style.user}>
                     <button onClick={toggleProfile}><img src={user} alt="Usuario" /></button>

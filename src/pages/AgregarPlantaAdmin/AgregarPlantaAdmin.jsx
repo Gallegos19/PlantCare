@@ -1,9 +1,9 @@
-import Style from './AgregarPlanta.module.css';
+import Style from './AgregarPlantaAdmin.module.css';
 import Nav from '../../components/nav/nav';
 import Footer from '../../components/footer/footer';
-import FormularioPlanta from '../../components/FormularioPlantaCliente/FormularioPlantaCliente';
+import FormularioPlanta from '../../components/FormularioPlanta/FormularioPlanta';
 import ImageUploader from '../../components/ImageUploader/ImageUploader';
-export default function AgregarPlanta() {
+export default function AgregarPlantaAdmin() {
   return (
     <div className={Style.containerAgregar}>
         <Nav/>
@@ -11,7 +11,7 @@ export default function AgregarPlanta() {
             <h2>Agregar nueva planta</h2>
             <div className={Style.containerFormulario}>
             <FormularioPlanta/>
-            <ImageUploader bandera='false'/>
+            <ImageUploader bandera='true'/>
             </div>
         </div>
         <Footer/>
