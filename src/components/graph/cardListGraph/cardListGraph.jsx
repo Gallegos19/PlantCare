@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Card from "../../homeComponent/card/card";
 import style from "./cardListGraph.module.css";
 import Graphics from "../graphics/graphics";
+import { RiCloseCircleFill } from "react-icons/ri";
 
 export default function CardListGraph({ plants }) {
     const [selectedPlant, setSelectedPlant] = useState(null);
@@ -24,7 +25,7 @@ export default function CardListGraph({ plants }) {
             {selectedPlant && (
                 <div className={style.containerGraph}>
                     <div className={style.closeButton} onClick={handleCloseGraphs}>
-                        X
+                        <RiCloseCircleFill size={20} color="#233B27" />
                     </div>
                     <div className={style.graphsContainer}>
                         <h2>{selectedPlant.name}</h2>

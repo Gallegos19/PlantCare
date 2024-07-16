@@ -1,6 +1,7 @@
 /* Estilos CSS */
 .cardList {
     display: flex;
+    flex-direction: row ;
     flex-wrap: wrap;
     justify-content: space-around;
 }
@@ -29,3 +30,4 @@
     font-size: 20px;
     color: #333;
 }
+
