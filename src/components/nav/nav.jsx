@@ -6,6 +6,7 @@ import user from "../../assets/male_user.png";
 import plus from "../../assets/plus.png";
 import ProfileCard from "../user/user";
 import { useNavigate } from "react-router-dom";
+import { RiCloseCircleFill } from "react-icons/ri";
 
 export default function Nav() {
     const [showProfile, setShowProfile] = useState(false);
@@ -32,7 +33,7 @@ export default function Nav() {
                 </div>
 
                 <a onClick={() => navigate('/')}>Inicio</a>
-                <a onClick={() => navigate('/')}>Gráficas</a>
+                <a onClick={() => navigate('/graph')}>Gráficas</a>
                 <a onClick={() => navigate('/')}>Datos</a>
                 <a onClick={() => navigate('/agregarplanta')}>Añadir <img src={plus} alt="Añadir" /></a>
 
@@ -48,12 +49,12 @@ export default function Nav() {
 
             {/* Contenedor del menú responsive */}
             <div className={`${style.menu} ${isMobileMenuOpen ? style.menuOpen : ''}`}>
-                <span className={style.closeIcon} onClick={toggleMobileMenu}>&times;</span>
+                <span className={style.closeIcon} onClick={toggleMobileMenu}><RiCloseCircleFill size={30} color='#233B27'/></span>
                 <a>PLANTCARE</a>
-                <a onClick={toggleMobileMenu}>Inicio</a>
-                <a onClick={toggleMobileMenu}>Gráficas</a>
-                <a onClick={toggleMobileMenu}>Datos</a>
-                <a onClick={toggleMobileMenu}>Añadir <img src={plus} alt="Añadir" /></a>
+                <a onClick={() => navigate('/')}>Inicio</a>
+                <a onClick={() => navigate('/graph')}>Gráficas</a>
+                <a onClick={() => navigate('/')}>Datos</a>
+                <a onClick={() => navigate('/agregarplanta')}>Añadir <img src={plus} alt="Añadir" /></a>
 
                 {/* Contenedor del perfil en dispositivos móviles */}
                 {showProfile && (

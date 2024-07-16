@@ -34,7 +34,7 @@ export default function Graphics({ plant }) {
     return (
         <div className={style.graphList}>
            
-                <div onClick={() => handleGraphClick("line")}>
+                <div className={style.graphics} onClick={() => handleGraphClick("line")}>
                     <h3>Line Chart</h3>
                     <ResponsiveContainer width="100%" height={200}>
                         <LineChart data={data}>
