@@ -130,7 +130,7 @@ img {
     }
 
     .buscador {
-        display: none; /* Ocultar el buscador en dispositivos móviles */
+       /* Ocultar el buscador en dispositivos móviles */
     }
 
     .menuToggle {
@@ -144,6 +144,7 @@ img {
     }
 
     .menuOpen {
+        position: fixed;
         transform: translateX(0); /* Deslizar el menú desde la izquierda cuando está abierto */
     }
     .user button{
@@ -156,7 +157,8 @@ img {
         display: flex;
         width: 60px;
         position: absolute;
-        bottom: 1vh;
+        left: 0;
+        bottom: 0vh;
     }
     
     .profileContainer {
