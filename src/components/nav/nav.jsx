@@ -25,11 +25,11 @@ export default function Nav() {
         <div>
             {/* Contenedor del menú horizontal */}
             <div className={`${style.nav} ${isMobileMenuOpen ? style.hideNav : ''}`}>
-                <a>PLANTCARE</a>
+                <a onClick={() => navigate('/')}>PLANTCARE</a>
 
                 <div className={style.buscador}>
                     <input className={style.search} type="text" placeholder="Buscar" />
-                    <img src={search} style={{ position: 'relative', cursor: 'pointer', right: '5px', bottom: '4px' }} alt="Buscar" />
+                    <img src={search} style={{ position: 'relative', cursor: 'pointer', right: '10px', bottom: '6px' }} alt="Buscar" />
                 </div>
 
                 <a onClick={() => navigate('/')}>Inicio</a>
@@ -50,7 +50,11 @@ export default function Nav() {
             {/* Contenedor del menú responsive */}
             <div className={`${style.menu} ${isMobileMenuOpen ? style.menuOpen : ''}`}>
                 <span className={style.closeIcon} onClick={toggleMobileMenu}><RiCloseCircleFill size={30} color='#233B27'/></span>
-                <a>PLANTCARE</a>
+                <a onClick={() => navigate('/')}>PLANTCARE</a>
+                <div className={style.buscador}>
+                    <input className={style.search} type="text" placeholder="Buscar" />
+                    <img src={search} style={{ position: 'relative', cursor: 'pointer', right: '10px', bottom: '6px' }} alt="Buscar" />
+                </div>
                 <a onClick={() => navigate('/')}>Inicio</a>
                 <a onClick={() => navigate('/graph')}>Gráficas</a>
                 <a onClick={() => navigate('/')}>Datos</a>
