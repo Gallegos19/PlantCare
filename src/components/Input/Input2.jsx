@@ -5,7 +5,7 @@ import { IoIosArrowDropdownCircle } from "react-icons/io";
 import { Snackbar, Alert, Select, MenuItem, InputLabel, FormControl } from '@mui/material';
 
 export default function Input2(props) {
-  let { texto, type, value, onChange, options } = props;
+  const { texto, type, value, onChange, options } = props;
 
   const [isValid, setIsValid] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
@@ -83,8 +83,7 @@ export default function Input2(props) {
     );
   } else if (options) {
     inputElement = (
-      <FormControl className={`${Style.input} ${isValid ? "" : Style.invalid}`} style={{width: '100%'}}>
-        {/* <InputLabel>{`Seleccione ${texto.toLowerCase()}`}</InputLabel> */}
+      <FormControl className={`${Style.input} ${isValid ? "" : Style.invalid}`} style={{ width: '100%' }}>
         <Select
           value={value}
           onChange={handleChange}
@@ -94,9 +93,9 @@ export default function Input2(props) {
           className={Style.select_input}
         >
           <MenuItem value="" disabled>{`Seleccione ${texto.toLowerCase()}`}</MenuItem>
-          {options.map((option, index) => (
-            <MenuItem key={index} value={option}>
-              {option}
+          {options.map((option) => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
             </MenuItem>
           ))}
         </Select>

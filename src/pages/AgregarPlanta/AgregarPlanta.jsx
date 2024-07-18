@@ -1,8 +1,11 @@
 import Style from './AgregarPlanta.module.css';
+import React, { useState, useEffect } from 'react';
 import Nav from '../../components/nav/nav';
 import Footer from '../../components/footer/footer';
 import FormularioPlanta from '../../components/FormularioPlantaCliente/FormularioPlantaCliente';
 import ImageUploader from '../../components/ImageUploader/ImageUploader';
+
+
 export default function AgregarPlanta() {
   return (
     <div className={Style.containerAgregar}>

@@ -1,22 +1,39 @@
-import React from "react";
+import {React,useState,useEffect} from "react";
 import Nav from "../../components/nav/nav";
 import CardListGraph from "../../components/graph/cardListGraph/cardListGraph";
 import Footer from "../../components/footer/footer";
 import style from "./Graph.module.css"
-import espadaDeRey from '../../assets/espadaderey_4.png';
-import pino from '../../assets/pino_4.png';
+import { fetchPlants } from '../../utils/RequestPlant/requestPlant';
 
-const plants = [
-    { name: "Espada de rey", image: espadaDeRey },
-    { name: "Pino", image: pino },
-    { name: "Pino", image: pino },
-];
+
 export default function Graph() {
-    return(
+    const [plants, setPlants] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const getPlants = async () => {
+            try {
+                const plantData = await fetchPlants();
+                setPlants(plantData);
+                setLoading(false);
+            } catch (error) {
+                setError(error.message);
+                setLoading(false);
+            }
+        };
+
+        getPlants();
+    }, []);
+
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error: {error}</p>;
+
+    return (
         <div className={style.container}>
-            <Nav/>
+            <Nav />
             <CardListGraph plants={plants} />
-            <Footer/>
+            <Footer />
         </div>
-    )
+    );
 }
