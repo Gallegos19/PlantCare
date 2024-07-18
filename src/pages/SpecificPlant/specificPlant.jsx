@@ -3,7 +3,9 @@ import { useParams } from "react-router-dom";
 import Nav from "../../components/nav/nav";
 import Footer from "../../components/footer/footer";
 import style from "./specificPlant.module.css";
+import { fetchPlants } from "../../utils/RequestPlant/requestPlant";
 import Air from "../../assets/air_quality.png";
+import { createPlant } from "../../utils/RequestPlant/requestPlant";
 import Calendar from "../../assets/google_calendar.png";
 import HydroPonic from "../../assets/hydroponics.png";
 import HygroMeter from "../../assets/hygrometer.png";
@@ -14,24 +16,25 @@ import Wet from "../../assets/wet.png";
 import espadaDeRey from "../../assets/espadaderey_4.png";
 import pino from "../../assets/pino_4.png";
 
-const plantData = {
-    "Espada de rey": {
-        image: espadaDeRey,
-        stats: [100, 100, 100, 100], 
-        icons: [HydroPonic, Sun, Air, Partly, Wet] 
-    },
-    "Pino": {
-        image: pino,
-        stats: [80, 60, 70, 90], 
-        icons: [Wet, Sun, Air, Partly] 
-    }
-};
-
 export default function SpecificPlant() {
     const { plantName } = useParams();
-    const plant = plantData[plantName];
+    const [plant, setPlant] = useState(null);
     const [currentDate, setCurrentDate] = useState(new Date());
     const [isOpen, setIsOpen] = useState(false);
+
+    useEffect(() => {
+        const getPlant = async () => {
+            try {
+                const plantsData = await fetchPlants();
+                const specificPlant = plantsData.find(p => p.name === plantName);
+                setPlant(specificPlant);
+            } catch (error) {
+                console.error("Error fetching plant data:", error);
+            }
+        };
+
+        getPlant();
+    }, [plantName]);
 
     const handlePreviousDay = () => {
         setCurrentDate((prevDate) => new Date(prevDate.setDate(prevDate.getDate() - 1)));
@@ -56,8 +59,8 @@ export default function SpecificPlant() {
             {plant ? (
                 <div className={style.plantInfo}>
                     <div>
-                        <h2>{plantName}</h2>
-                        <img src={plant.image} alt={plantName} className={style.plantImage} />
+                        <h2>{plant.name}</h2>
+                        <img src={plant.image} alt={plant.name} className={style.plantImage} />
                     </div>
 
                     <div className={style.cardContent}>
@@ -81,14 +84,36 @@ export default function SpecificPlant() {
                         </div>
 
                         <div className={style.stats}>
-                            {plant.stats.map((stat, index) => (
-                                <div key={index} className={style.stat}>
-                                    <div className={style.circulo}>
-                                        <span>{stat} %</span>
-                                    </div>
-                                    <img src={plant.icons[index]} alt="icon" className={style.icono} />
+                            <div className={style.stat}>
+                                <div className={style.circulo}>
+                                    <span>{plant.humidity_earth} %</span>
                                 </div>
-                            ))}
+                                <img src={Wet} alt="Humidity Earth" className={style.icono} />
+                            </div>
+                            <div className={style.stat}>
+                                <div className={style.circulo}>
+                                    <span>{plant.humidity_environment} %</span>
+                                </div>
+                                <img src={HygroMeter} alt="Humidity Environment" className={style.icono} />
+                            </div>
+                            <div className={style.stat}>
+                                <div className={style.circulo}>
+                                    <span>{plant.brightness} %</span>
+                                </div>
+                                <img src={Sun} alt="Brightness" className={style.icono} />
+                            </div>
+                            <div className={style.stat}>
+                                <div className={style.circulo}>
+                                    <span>{plant.ambient_temperature} °C</span>
+                                </div>
+                                <img src={Partly} alt="Ambient Temperature" className={style.icono} />
+                            </div>
+                            <div className={style.stat}>
+                                <div className={style.circulo}>
+                                    <span>{plant.mq135} ppm</span>
+                                </div>
+                                <img src={Air} alt="MQ135" className={style.icono} />
+                            </div>
                         </div>
 
                         {isOpen && (
