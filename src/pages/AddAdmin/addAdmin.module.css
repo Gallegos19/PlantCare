@@ -1,0 +1,14 @@
+.mainContent {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+   
+    text-align: center;
+}
+
+.cardsContainer {
+    display: flex;
+    gap: 1rem;
+    justify-content: space-around;
+    margin-top: 20px;
+}

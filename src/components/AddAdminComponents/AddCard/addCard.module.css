@@ -1,0 +1,27 @@
+.card {
+    width: 30%;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card h3 {
+    margin: 10px 0 0;
+    font-size: 1.2em;
+}
+
+.iconContainer {
+    font-size: 50px;
+    margin-bottom: 10px;
+}
