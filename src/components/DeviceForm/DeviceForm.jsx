@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 import style from "./deviceForm.module.css"
-
-import Footer from '../footer/footer';
-import ImageUploader from '../ImageUploader/ImageUploader';
 import Input from '../Input/Input';
 import Button from '../Button/Button';
 import { Snackbar, Alert } from '@mui/material';

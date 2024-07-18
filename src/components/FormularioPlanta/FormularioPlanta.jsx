@@ -1,27 +1,30 @@
-import { useState, forwardRef, useImperativeHandle } from "react";
+import { useState,useEffect, forwardRef, useImperativeHandle } from "react";
 import Input from "../Input/Input";
 import Input2 from "../Input/Input2";
 import Button from "../Button/Button";
 import Style from "./FormularioPlanta.module.css";
+import { createPlant,fetchCategories, fetchTypes, fetchFamilies} from "../../utils/RequestPlant/requestPlant";
 import { useNavigate } from "react-router-dom";
 import { Snackbar, Alert } from "@mui/material";
 
 const FormularioPlanta = forwardRef((props, ref) => {
-    const [nombreCientifico, setnombreCientifico] = useState("");
-    const [nombre, setNombre] = useState("");
-    const [categoria, setcategoria] = useState("");
-    const [familia, setfamilia] = useState("");
-    const [tipo, setTipo] = useState('');
-    const [temperaturaTierra, setTemperaturaTierra] = useState('')
-    const [humedadTierra, setHumedadTierra] = useState('')
-    const [luz, setLuz] = useState('')
-    const [temperatura, setTemperatura] = useState('')
-    const [gas, setGas] = useState('')
+  const [nombreCientifico, setNombreCientifico] = useState("");
+  const [nombre, setNombre] = useState("");
+  const [categoria, setCategoria] = useState("");
+  const [familia, setFamilia] = useState("");
+  const [tipo, setTipo] = useState("");
+  const [temperaturaTierra, setTemperaturaTierra] = useState("");
+  const [humedadTierra, setHumedadTierra] = useState("");
+  const [luz, setLuz] = useState("");
+  const [temperatura, setTemperatura] = useState("");
+  const [gas, setGas] = useState("");
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
+  const [categories, setCategories] = useState([]);
+  const [types, setTypes] = useState([]);
+  const [families, setFamilies] = useState([]);
   const navigate = useNavigate();
 
-  // Permite que el padre acceda al ref del formulario
   useImperativeHandle(ref, () => ({
     scrollIntoView: () => {
       const formElement = document.getElementById("formulario-Planta");
@@ -31,15 +34,54 @@ const FormularioPlanta = forwardRef((props, ref) => {
     },
   }));
 
-  const handleEntrar = () => {
-    // Validar que ambos campos estén llenos
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const fetchedCategories = await fetchCategories();
+        setCategories(fetchedCategories.map(item => item.name));
+        
+        const fetchedTypes = await fetchTypes();
+        setTypes(fetchedTypes.map(item => item.name));
+
+        const fetchedFamilies = await fetchFamilies();
+        setFamilies(fetchedFamilies.map(item => item.name));
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const handleEntrar = async () => {
     if (
-      username.trim() !== "" &&
-      contrasena.trim() !== "" &&
+      nombreCientifico.trim() !== "" &&
+      familia.trim() !== "" &&
       nombre.trim() !== "" &&
-      apellido.trim() !== ""
+      categoria.trim() !== ""
     ) {
-      navigate("/login");
+      const plantData = {
+        name_scientific: nombreCientifico,
+        name: nombre,
+        humidity_earth: humedadTierra,
+        brightness: luz,
+        ambient_temperature: temperatura,
+        mq135: gas,
+        humidity_environment: temperaturaTierra,
+        categories: [categoria], // aseguramos que las categorías sean enviadas como un array
+        types: [tipo], // aseguramos que los tipos sean enviados como un array
+        families: [familia], // aseguramos que las familias sean enviadas como un array
+      };
+
+      try {
+        const response = await createPlant(plantData);
+        console.log("Plant created successfully:", response);
+        navigate("/"); // Navegar a la página de inicio u otra página
+      } catch (error) {
+        console.error("Error creating plant:", error);
+        setAlertMessage("Hubo un error al crear la planta.");
+        setAlertOpen(true);
+      }
     } else {
       setAlertMessage("Por favor, completa todos los campos.");
       setAlertOpen(true);
@@ -56,7 +98,7 @@ const FormularioPlanta = forwardRef((props, ref) => {
   return (
     <div id="formulario-Planta" className={Style.containerForm}>
       <div className={Style.containerInputs}>
-      <div className={Style.groups}>
+        <div className={Style.groups}>
           <Input
             texto="Nombre"
             type="text"
@@ -64,29 +106,29 @@ const FormularioPlanta = forwardRef((props, ref) => {
             onChange={(newValue) => setNombre(newValue)}
           />
           <Input2
-            texto="Categoria"
+            texto="Categoría"
             type="text"
             value={categoria}
-            options={["Opción 1", "Opción 2", "Opción 3"]}
-            onChange={(newValue) => setcategoria(newValue)}
+            options={categories}
+            onChange={(newValue) => setCategoria(newValue)}
           />
           <Input
-            texto="Nombre Cientifico"
+            texto="Nombre Científico"
             type="text"
             value={nombreCientifico}
-            onChange={(newValue) => setnombreCientifico(newValue)}
+            onChange={(newValue) => setNombreCientifico(newValue)}
           />
-          <Input
+          <Input2
             texto="Familia"
             type="text"
             value={familia}
-            onChange={(newValue) => setfamilia(newValue)}
+            options={families}
+            onChange={(newValue) => setFamilia(newValue)}
           />
-          <Input2
+          <Input
             texto="Gas"
             type="text"
             value={gas}
-            options={["Opción 1", "Opción 2", "Opción 3"]}
             onChange={(newValue) => setGas(newValue)}
           />
         </div>
@@ -95,7 +137,7 @@ const FormularioPlanta = forwardRef((props, ref) => {
             texto="Tipo"
             type="text"
             value={tipo}
-            options={["de Sol", "de Sombra"]}
+            options={types}
             onChange={(newValue) => setTipo(newValue)}
           />
           <Input
@@ -111,7 +153,7 @@ const FormularioPlanta = forwardRef((props, ref) => {
             onChange={(newValue) => setHumedadTierra(newValue)}
           />
           <Input
-            texto="Luminocidad"
+            texto="Luminosidad"
             type="text"
             value={luz}
             onChange={(newValue) => setLuz(newValue)}
@@ -125,8 +167,8 @@ const FormularioPlanta = forwardRef((props, ref) => {
         </div>
       </div>
       <div onClick={handleEntrar}>
-            <Button title="Guardar" />
-          </div>
+        <Button title="Guardar" />
+      </div>
       <Snackbar open={alertOpen} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
           {alertMessage}
@@ -137,3 +179,5 @@ const FormularioPlanta = forwardRef((props, ref) => {
 });
 
 export default FormularioPlanta;
+
+
