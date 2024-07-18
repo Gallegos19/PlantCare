@@ -1,0 +1,11 @@
+.containerSectionAdd{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    padding: 5vh;
+}
+
+.style.containerFormulario{
+    display: flex;
+    flex-direction: row;
+}
