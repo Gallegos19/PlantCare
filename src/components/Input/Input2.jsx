@@ -27,7 +27,8 @@ export default function Input2(props) {
         setAlertOpen(true);
       }
     } else {
-      valid = value ? value.trim() !== "" : false;
+      const valueStr = value ? String(value) : "";
+      valid = valueStr.trim() !== "";
       if (!valid) {
         setAlertMessage("Este campo no puede estar vacío.");
         setAlertOpen(true);
@@ -93,8 +94,8 @@ export default function Input2(props) {
           className={Style.select_input}
         >
           <MenuItem value="" disabled>{`Seleccione ${texto.toLowerCase()}`}</MenuItem>
-          {options.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
+          {options.map((option, index) => (
+            <MenuItem key={`${option.value}-${index}`} value={option.value}>
               {option.label}
             </MenuItem>
           ))}
