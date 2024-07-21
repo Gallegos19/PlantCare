@@ -4,7 +4,7 @@ import style from "./cardListGraph.module.css";
 import Graphics from "../graphics/graphics";
 import { RiCloseCircleFill } from "react-icons/ri";
 
-export default function CardListGraph({ plants }) {
+export default function     CardListGraph({ plants }) {
     const [selectedPlant, setSelectedPlant] = useState(null);
 
     const handleCardClick = (plant) => {

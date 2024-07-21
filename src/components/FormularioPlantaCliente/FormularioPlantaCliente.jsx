@@ -164,6 +164,8 @@ const FormularioPlantaCliente = forwardRef((props, ref) => {
       };
 
       addPlant(plantData);
+
+      
       console.log("Planta agregada exitosamente:", plantData);
       navigate("/");
     } else {

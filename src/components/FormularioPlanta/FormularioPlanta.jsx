@@ -1,6 +1,6 @@
 import { useState,useEffect, forwardRef, useImperativeHandle } from "react";
 import Input from "../Input/Input";
-import Input2 from "../Input/Input2";
+import Input3 from "../Input/Input3";
 import Button from "../Button/Button";
 import Style from "./FormularioPlanta.module.css";
 import { createPlant,fetchCategories, fetchTypes, fetchFamilies} from "../../utils/RequestPlant/requestPlant";
@@ -105,7 +105,7 @@ const FormularioPlanta = forwardRef((props, ref) => {
             value={nombre}
             onChange={(newValue) => setNombre(newValue)}
           />
-          <Input2
+          <Input3
             texto="Categoría"
             type="text"
             value={categoria}
@@ -118,7 +118,7 @@ const FormularioPlanta = forwardRef((props, ref) => {
             value={nombreCientifico}
             onChange={(newValue) => setNombreCientifico(newValue)}
           />
-          <Input2
+          <Input3
             texto="Familia"
             type="text"
             value={familia}
@@ -133,7 +133,7 @@ const FormularioPlanta = forwardRef((props, ref) => {
           />
         </div>
         <div className={Style.groups}>
-          <Input2
+          <Input3
             texto="Tipo"
             type="text"
             value={tipo}
@@ -179,5 +179,3 @@ const FormularioPlanta = forwardRef((props, ref) => {
 });
 
 export default FormularioPlanta;
-
-

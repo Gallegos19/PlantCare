@@ -1,38 +1,50 @@
 import {React, useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, BarChart, Bar, ScatterChart, Scatter } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, AreaChart, Area, RadarChart, ResponsiveContainer, BarChart, Bar,PolarGrid ,PolarAngleAxis ,PolarRadiusAxis ,Radar, ScatterChart, Scatter } from 'recharts';
 import style from "./graphics.module.css";
-import { fetchPlants } from "../../../utils/RequestPlant/requestPlant";
+
 
 export default function Graphics({ plant }) {
     const [data, setData] = useState([]);
     const [dataScatter, setDataScatter] = useState([]);
+    const [radarData, setRadarData] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const plantData = await fetchPlants();
-                // Aquí debes adaptar los datos obtenidos para que coincidan con tus gráficas
-                // Por ejemplo, si `plantData` tiene la estructura esperada para las gráficas:
-                setData(plantData.map(p => ({
-                    name: p.name,
-                    uv: p.brightness,
-                    pv: p.ambient_temperature,
-                    amt: p.humidity_earth
-                })));
+        // Obtener datos desde localStorage
+        const localStoragePlants = JSON.parse(localStorage.getItem('plants')) || [];
 
-                setDataScatter(plantData.map(p => ({
-                    humidity: p.humidity_earth,
-                    growth: p.ambient_temperature // O cualquier otro dato relevante
-                })));
-            } catch (error) {
-                console.error("Error fetching plant data:", error);
-            }
-        };
+        // Buscar la planta seleccionada en localStorage
+        const selectedPlant = localStoragePlants.find(p => p.name === plant.name);
 
-        fetchData();
-    }, []);
+        if (selectedPlant) {
+            // Configurar datos para gráficos
+            setData([{
+                name: selectedPlant.name,
+                brightness: selectedPlant.brightness,
+                ambient_temperature: selectedPlant.ambient_temperature,
+                humidity_earth: selectedPlant.humidity_earth,
+                humidity_environment: selectedPlant.humidity_environment,
+                mq135: selectedPlant.mq135
+            }]);
+
+            setDataScatter([{
+                humidity: selectedPlant.humidity_earth,
+                temperature: selectedPlant.ambient_temperature
+            }]);
+
+            setRadarData([{
+                name: selectedPlant.name,
+                brightness: selectedPlant.brightness,
+                ambient_temperature: selectedPlant.ambient_temperature,
+                humidity_earth: selectedPlant.humidity_earth,
+                humidity_environment: selectedPlant.humidity_environment,
+                mq135: selectedPlant.mq135
+            }]);
+        } else {
+            console.error("Planta no encontrada en localStorage");
+        }
+    }, [plant]);
 
     const handleGraphClick = (graphType) => {
         navigate(`/specificGraph`, { state: { plant, graphType } });
@@ -49,13 +61,13 @@ export default function Graphics({ plant }) {
                         <YAxis />
                         <Tooltip />
                         <Legend />
-                        <Line type="monotone" dataKey="pv" stroke="#8884d8" />
-                        <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+                        <Line type="monotone" dataKey="ambient_temperature" stroke="#8884d8" name="Ambient Temperature" />
+                        <Line type="monotone" dataKey="humidity_earth" stroke="#82ca9d" name="Soil Humidity" />
                     </LineChart>
                 </ResponsiveContainer>
             </div>
             <div onClick={() => handleGraphClick("bar")}>
-                <h3>Histogram</h3>
+                <h3>Bar Chart</h3>
                 <ResponsiveContainer width="100%" height={200}>
                     <BarChart data={data}>
                         <CartesianGrid strokeDasharray="3 3" />
@@ -63,21 +75,29 @@ export default function Graphics({ plant }) {
                         <YAxis />
                         <Tooltip />
                         <Legend />
-                        <Bar dataKey="pv" fill="#8884d8" />
-                        <Bar dataKey="uv" fill="#82ca9d" />
+                        <Bar dataKey="brightness" fill="#8884d8" name="Brightness" />
+                        <Bar dataKey="ambient_temperature" fill="#82ca9d" name="Ambient Temperature" />
+                        <Bar dataKey="humidity_earth" fill="#ffc658" name="Soil Humidity" />
+                        <Bar dataKey="humidity_environment" fill="#d0ed57" name="Environment Humidity" />
+                        <Bar dataKey="mq135" fill="#ff7300" name="MQ135 Sensor" />
                     </BarChart>
                 </ResponsiveContainer>
             </div>
-            <div onClick={() => handleGraphClick("scatter")}>
-                <h3>Scatter Plot</h3>
+            
+            <div onClick={() => handleGraphClick("radar")}>
+                <h3>Radar Chart</h3>
                 <ResponsiveContainer width="100%" height={200}>
-                    <ScatterChart>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis type="number" dataKey="humidity" name="Humidity" unit="%" />
-                        <YAxis type="number" dataKey="growth" name="Growth" unit="cm" />
-                        <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-                        <Scatter name="A Scatter" data={dataScatter} fill="#8884d8" />
-                    </ScatterChart>
+                    <RadarChart data={radarData}>
+                        <PolarGrid />
+                        <PolarAngleAxis dataKey="name" />
+                        <PolarRadiusAxis />
+                        <Tooltip />
+                        <Radar name="Plant Metrics" dataKey="brightness" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
+                        <Radar name="Ambient Temperature" dataKey="ambient_temperature" stroke="#82ca9d" fill="#82ca9d" fillOpacity={0.6} />
+                        <Radar name="Soil Humidity" dataKey="humidity_earth" stroke="#ffc658" fill="#ffc658" fillOpacity={0.6} />
+                        <Radar name="Environment Humidity" dataKey="humidity_environment" stroke="#d0ed57" fill="#d0ed57" fillOpacity={0.6} />
+                        <Radar name="MQ135 Sensor" dataKey="mq135" stroke="#ff7300" fill="#ff7300" fillOpacity={0.6} />
+                    </RadarChart>
                 </ResponsiveContainer>
             </div>
         </div>

@@ -3,18 +3,14 @@ import { useParams } from "react-router-dom";
 import Nav from "../../components/nav/nav";
 import Footer from "../../components/footer/footer";
 import style from "./specificPlant.module.css";
-import { fetchPlants } from "../../utils/RequestPlant/requestPlant";
 import Air from "../../assets/air_quality.png";
-import { createPlant } from "../../utils/RequestPlant/requestPlant";
 import Calendar from "../../assets/google_calendar.png";
-import HydroPonic from "../../assets/hydroponics.png";
 import HygroMeter from "../../assets/hygrometer.png";
 import NextPageIcon from "../../assets/next_page.png";
 import Partly from "../../assets/partly_cloudy_day.png";
 import Sun from "../../assets/sun.png";
 import Wet from "../../assets/wet.png";
-import espadaDeRey from "../../assets/espadaderey_4.png";
-import pino from "../../assets/pino_4.png";
+
 
 export default function SpecificPlant() {
     const { plantName } = useParams();
@@ -23,13 +19,16 @@ export default function SpecificPlant() {
     const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
-        const getPlant = async () => {
+        const getPlant = () => {
             try {
-                const plantsData = await fetchPlants();
+                // Leer datos del localStorage
+                const plantsData = JSON.parse(localStorage.getItem('plants')) || [];
+                console.log("Fetched plants data from localStorage:", plantsData); // Debugging line
                 const specificPlant = plantsData.find(p => p.name === plantName);
+                console.log("Specific plant found:", specificPlant); // Debugging line
                 setPlant(specificPlant);
             } catch (error) {
-                console.error("Error fetching plant data:", error);
+                console.error("Error reading plant data from localStorage:", error);
             }
         };
 
