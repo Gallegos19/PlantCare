@@ -7,10 +7,9 @@ import { useNavigate } from "react-router-dom";
 import { Snackbar, Alert } from "@mui/material";
 import { fetchPlants } from '../../utils/RequestPlant/requestPlant';
 import PlantContext from "../PlantContext/plantContext";
-
+import ImageUploaderClient from "../ImageUploader/ImageUploaderClient";
 
 const FormularioPlantaCliente = forwardRef((props, ref) => {
-  // Estados
   const [nombreCientifico, setNombreCientifico] = useState("");
   const [nombre, setNombre] = useState("");
   const [categoria, setCategoria] = useState("");
@@ -24,6 +23,7 @@ const FormularioPlantaCliente = forwardRef((props, ref) => {
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [plants, setPlants] = useState([]);
+  const [imageUrl, setImageUrl] = useState("");
   const navigate = useNavigate();
   const { addPlant } = useContext(PlantContext);
 
@@ -51,6 +51,7 @@ const FormularioPlantaCliente = forwardRef((props, ref) => {
           categories: plant.categories,
           types: plant.types,
           families: plant.families,
+          imageUrl: plant.url_image_plant // Asegúrate de que el campo se llame url_image_plant
         })));
       } catch (error) {
         console.error("Error fetching plants:", error);
@@ -87,6 +88,7 @@ const FormularioPlantaCliente = forwardRef((props, ref) => {
       handleChange(setLuz)(selectedPlant.brightness || "");
       handleChange(setTemperatura)(selectedPlant.ambient_temperature || "");
       handleChange(setGas)(selectedPlant.mq135 || "");
+      setImageUrl(selectedPlant.imageUrl || ""); // Actualiza la URL de la imagen
     } else {
       // Limpiar campos si no se encuentra la planta
       handleChange(setNombre)("");
@@ -99,11 +101,11 @@ const FormularioPlantaCliente = forwardRef((props, ref) => {
       handleChange(setLuz)("");
       handleChange(setTemperatura)("");
       handleChange(setGas)("");
+      setImageUrl(""); // Limpiar la URL de la imagen
     }
   };
 
   const validateFields = () => {
-    // Convierte los valores a strings para la validación
     const allFieldsValid = [
       { name: 'nombre', value: nombre },
       { name: 'nombreCientifico', value: nombreCientifico },
@@ -145,11 +147,11 @@ const FormularioPlantaCliente = forwardRef((props, ref) => {
       humedadTierra,
       luz,
       temperatura,
-      gas
+      gas,
+      imageUrl // Incluye la URL de la imagen en los datos de entrada
     });
 
     if (validateFields()) {
-      console.log("hahaha");
       const plantData = {
         name: nombre,
         name_scientific: nombreCientifico,
@@ -161,10 +163,10 @@ const FormularioPlantaCliente = forwardRef((props, ref) => {
         categories: [categoria],
         types: [tipo],
         families: [familia],
+        url_image_plant: imageUrl // Asegúrate de que el campo coincida con el nombre de la base de datos
       };
 
       addPlant(plantData);
-
       
       console.log("Planta agregada exitosamente:", plantData);
       navigate("/");
@@ -254,6 +256,7 @@ const FormularioPlantaCliente = forwardRef((props, ref) => {
           />
         </div>
       </div>
+      <ImageUploaderClient imageUrl={imageUrl} bandera="true" setImageUrl={setImageUrl} /> {/* Pasa la URL de la imagen y la función setImageUrl */}
       <div onClick={handleEntrar}>
         <Button title="Guardar" />
       </div>

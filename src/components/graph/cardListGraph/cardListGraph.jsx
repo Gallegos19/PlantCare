@@ -19,7 +19,7 @@ export default function     CardListGraph({ plants }) {
         <div className={style.cardList}>
             {plants.map((plant, index) => (
                 <div key={index} className={style.cardWrapper} onClick={() => handleCardClick(plant)}>
-                    <Card name={plant.name} image={plant.image} />
+                    <Card name={plant.name} imageUrl={plant.url_image_plant} />
                 </div>
             ))}
             {selectedPlant && (

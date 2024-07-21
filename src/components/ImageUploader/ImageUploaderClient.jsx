@@ -1,13 +1,15 @@
-
-import { useState } from 'react';
-import Style from './ImageUploader.module.css';
+import { useState, useEffect } from 'react';
+import Style from "./ImageUploader.module.css"
 import placeholderImage from '../../assets/fondopixel.png'; 
 
-function ImageUploader(props) {
+function ImageUploaderClient({ imageUrl: initialImageUrl, bandera, setImageUrl }) {
   const [selectedImage, setSelectedImage] = useState(null);
   const [imageLoading, setImageLoading] = useState(false);
-  const [imageUrl, setImageUrl] = useState(null);
-  const { bandera, setImageUrl: updateImageUrl } = props;
+  const [imageUrl, setImageUrlState] = useState(initialImageUrl);
+
+  useEffect(() => {
+    setImageUrlState(initialImageUrl);
+  }, [initialImageUrl]);
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -53,8 +55,8 @@ function ImageUploader(props) {
       }
 
       const result = await response.json();
-      setImageUrl(result.secure_url);
-      updateImageUrl(result.secure_url); // Actualiza la URL de la imagen en el componente padre
+      setImageUrlState(result.secure_url);
+      setImageUrl(result.secure_url); // Actualiza la URL de la imagen en el componente padre
       console.log("Imagen subida con éxito:", result.secure_url);
     } catch (error) {
       console.error("Error al subir la imagen:", error);
@@ -78,4 +80,4 @@ function ImageUploader(props) {
   );
 }
 
-export default ImageUploader;
+export default ImageUploaderClient;

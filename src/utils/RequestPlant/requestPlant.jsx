@@ -78,6 +78,7 @@ export const createPlant = async (plantData) => {
           categories: plantData.categories,
           types: plantData.types,
           families: plantData.families,
+          url_image_plant: plantData.url_image_plant
         }),
       });
   
@@ -92,3 +93,4 @@ export const createPlant = async (plantData) => {
       throw error;
     }
   };
+  
