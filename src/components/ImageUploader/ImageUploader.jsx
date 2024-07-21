@@ -1,7 +1,7 @@
-// ImageUploader.js
+
 import { useState } from 'react';
 import Style from './ImageUploader.module.css';
-import placeholderImage from '../../assets/fondopixel.png'; // Asegúrate de tener una imagen placeholder en tu proyecto
+import placeholderImage from '../../assets/fondopixel.png'; 
 
 function ImageUploader(props) {
   const [selectedImage, setSelectedImage] = useState(null);

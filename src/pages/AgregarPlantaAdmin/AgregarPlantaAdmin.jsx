@@ -11,7 +11,7 @@ export default function AgregarPlantaAdmin() {
             <h2>Agregar nueva planta</h2>
             <div className={Style.containerFormulario}>
             <FormularioPlanta/>
-            <ImageUploader bandera='true'/>
+           <ImageUploader bandera='true'/>
             </div>
         </div>
         <Footer/>

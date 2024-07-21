@@ -2,7 +2,7 @@ import { useState } from "react";
 import Style from './Input.module.css';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { IoIosArrowDropdownCircle } from "react-icons/io";
-import { Snackbar, Alert, Select, MenuItem, InputLabel, FormControl } from '@mui/material';
+import { Snackbar, Alert, Select, MenuItem, FormControl } from '@mui/material';
 
 export default function Input2(props) {
   const { texto, type, value, onChange, options } = props;
@@ -95,8 +95,8 @@ export default function Input2(props) {
         >
           <MenuItem value="" disabled>{`Seleccione ${texto.toLowerCase()}`}</MenuItem>
           {options.map((option, index) => (
-            <MenuItem key={`${option.value}-${index}`} value={option.value}>
-              {option.label}
+            <MenuItem key={index} value={option}>
+              {option}
             </MenuItem>
           ))}
         </Select>
