@@ -167,6 +167,20 @@ export const fetchDevice = async () => {
     }
 };
 
+export const fetchUsers = async () => {
+  try {
+      const response = await fetch("http://44.197.7.97:8081/api/users");
+      if (!response.ok) {
+          throw new Error("Network response was not ok " + response.statusText);
+      }
+      const data = await response.json();
+      console.log(data.data);
+      return data.data; // Asegúrate de que 'data.data' es un array de usuarios
+  } catch (error) {
+      console.error("There was a problem with the fetch operation:", error);
+      throw error;
+  }
+};
 
 
 

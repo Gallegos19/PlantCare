@@ -1,21 +1,48 @@
 import React, { useEffect, useState } from 'react';
 import style from './userTable.module.css';
 
-const mockUsers = [
-  { id: 1, name: 'John Doe', email: 'john.doe@example.com' },
-  { id: 2, name: 'Jane Smith', email: 'jane.smith@example.com' },
-  { id: 3, name: 'Alice Johnson', email: 'alice.johnson@example.com' }
-];
+export const fetchUsers = async () => {
+  try {
+      const response = await fetch("http://44.197.7.97:8081/api/users");
+      if (!response.ok) {
+          throw new Error("Network response was not ok " + response.statusText);
+      }
+      const data = await response.json();
+      console.log(data.data);
+      return data.data; // Asegúrate de que 'data.data' es un array de usuarios
+  } catch (error) {
+      console.error("There was a problem with the fetch operation:", error);
+      throw error;
+  }
+};
 
 export default function UserTable() {
-  const [users, setUsers] = useState(mockUsers);
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Reemplaza con la URL de tu API
-    fetch('/api/users')
-      .then(response => response.json())
-      .then(data => setUsers(data));
+    const fetchData = async () => {
+      try {
+        const response = await fetchUsers(); // Asegúrate de llamar a 'fetchUsers'
+        console.log("Fetched users:", response);
+        setUsers(response); // Asumiendo que response es un array de usuarios
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
   }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!users || users.length === 0) {
+    return <div>No users found</div>;
+  }
 
   return (
     <div className={style.container}>
@@ -32,7 +59,7 @@ export default function UserTable() {
           {users.map(user => (
             <tr key={user.id}>
               <td>{user.id}</td>
-              <td>{user.name}</td>
+              <td>{user.name} {user.last_name}</td>
               <td>{user.email}</td>
             </tr>
           ))}
