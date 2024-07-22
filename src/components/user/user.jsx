@@ -24,7 +24,7 @@ export default function ProfileCard({ name, email }) {
                         Dudas / apoyo
                         <span className={style.arrow}>→</span>
                     </button>
-                    <button className={style.button} onClick={() => { navigate('/login') }}>
+                    <button className={style.button} onClick={() => { navigate('/login') ; localStorage.removeItem('userEmail'); localStorage.removeItem('jwt')}}>
                         <img src={logoutIcon} alt="Cerrar Sesión" className={style.icon} />
                         Cerrar Sesión
                         <span className={style.arrow}>→</span>

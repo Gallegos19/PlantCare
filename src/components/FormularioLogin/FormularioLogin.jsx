@@ -30,7 +30,9 @@ const FormularioLogin = forwardRef((props, ref) => {
         const response = await fetchLogin({ email: username, password: contrasena });
         if (response.success) {
           // Guardar el correo en localStorage
+          console.log(response);
           localStorage.setItem('userEmail', username);
+          localStorage.setItem("jwt", response.data.access_token)
           navigate('/');
         } else {
           setAlertMessage('Credenciales incorrectas.');

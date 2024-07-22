@@ -11,6 +11,7 @@ import { RiCloseCircleFill } from "react-icons/ri";
 export default function Nav() {
     const [showProfile, setShowProfile] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const emailU = localStorage.getItem('userEmail')
     const navigate = useNavigate();
 
     const toggleProfile = () => {
@@ -57,13 +58,13 @@ export default function Nav() {
                 </div>
                 <a onClick={() => navigate('/')}>Inicio</a>
                 <a onClick={() => navigate('/graph')}>Gráficas</a>
-                <a onClick={() => navigate('/')}>Datos</a>
+                <a onClick={() => navigate('/data')}>Datos</a>
                 <a onClick={() => navigate('/agregarplanta')}>Añadir <img src={plus} alt="Añadir" /></a>
 
                 {/* Contenedor del perfil en dispositivos móviles */}
                 {showProfile && (
                     <div className={style.profileContainerMovil}>
-                        <ProfileCard name="Nombre Completo" email="Correo electrónico" />
+                        <ProfileCard name="Nombre Completo" email={emailU} />
                     </div>
                 )}
                 <div className={style.user}>
@@ -74,7 +75,7 @@ export default function Nav() {
             {/* Contenedor del perfil */}
             {showProfile && (
                 <div className={style.profileContainer}>
-                    <ProfileCard name="Nombre Completo" email="Correo electrónico" />
+                    <ProfileCard name="Nombre Completo" email={emailU}/>
                 </div>
             )}
         </div>
