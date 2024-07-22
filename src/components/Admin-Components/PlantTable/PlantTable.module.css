@@ -5,13 +5,13 @@
     align-items: center;
     margin-bottom: 5em;
 }
+
 .table {
     width: 90%;
     border-collapse: collapse;
     margin: auto;
     font-family: 'Poppins', sans-serif;
 }
-
 
 .table, th, td {
     border: 1px solid rgba(39, 18, 2, 1);
@@ -30,6 +30,11 @@ th {
 tr:nth-child(even) {
     background-color: #FBF6F6;
 }
+.table td img {
+    width: 100px; /* Ajusta el tamaño según lo necesites */
+    height: auto; /* Mantiene la relación de aspecto */
+  }
+  
 
 tr:hover {
     background-color: rgba(39, 18, 2, 0.1);

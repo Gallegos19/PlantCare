@@ -13,16 +13,20 @@ import Admin from '../pages/Admin/admin';
 import AddAdmin from '../pages/AddAdmin/addAdmin';
 import AddDevice from '../pages/AddDevice/addDevice';
 import SpecificGraph from '../pages/SpecificGraph/specificGraph';
+
+
+import AddUser from '../pages/AddUser/AddUser';
+
 import DataClient from '../pages/StadisticalDataClient/dataClient';
 import Data from '../components/stadisticalData/stadisticalData';
+
 import { PlantProvider } from '../components/PlantContext/plantContext';
+
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-
   useEffect(() => {
     const token = localStorage.getItem("jwt");
-    console.log(token);
     if (token) {
       setIsAuthenticated(true);
     }
@@ -34,27 +38,31 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path='/admin' element={<Admin />} />
+          <Route path='/add-user' element={<AddUser /> } />
           {isAuthenticated ? (
             <>
-           <Route path='/' element={<Home />} />
-          <Route path='/admin' element={<Admin />} />
-          <Route path='/specific/:plantName' element={<SpecificPlant />} />
-          <Route path='/graph' element={<Graph />} />
-          <Route path='/adminData' element={<AdminData />} />
-          <Route path="/dataClient" element={<DataClient />} />
-          <Route path='/addAdmin' element={<AddAdmin />} />
-          <Route path='/specificGraph/' element={<SpecificGraph />} />
-          <Route path='/stadistical/:plantName' element={<Data />} />
-          <Route path="/agregarplanta" element={<AgregarPlanta />} />
-          <Route path="/agregarplantaadmin" element={<AgregarPlantaAdmin />} />
-          <Route path="/addDevice" element={<AddDevice />} />
+
+              <Route path='/' element={<Home />} />
+              <Route path='/specific/:plantName' element={<SpecificPlant />} />
+              <Route path='/graph' element={<Graph />} />
+              <Route path='/adminData' element={<AdminData />} />
+              <Route path='/addAdmin' element={<AddAdmin />} />
+              <Route path='/specificGraph/' element={<SpecificGraph />} />
+              <Route path="/agregarplanta" element={<AgregarPlanta />} />
+              <Route path="/agregarplantaadmin" element={<AgregarPlantaAdmin />} />
+              <Route path="/addDevice" element={<AddDevice />} />
+              <Route path="/dataClient" element={<DataClient />} />
+              <Route path='/stadistical/:plantName' element={<Data />} />
+       
             </>
-          ) : null}
+          ) : (
+            <Route path="*" element={<Navigate to="/login" replace />} />
+          )}
         </Routes>
       </BrowserRouter>
     </PlantProvider>
-
-  )
+  );
 }
 
-export default App
+export default App;

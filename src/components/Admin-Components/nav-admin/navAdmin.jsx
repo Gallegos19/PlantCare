@@ -12,6 +12,7 @@ export default function NavAdmin() {
     const [showProfile, setShowProfile] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const navigate = useNavigate();
+    const emailU = localStorage.getItem('userEmail')
 
     const toggleProfile = () => {
         setShowProfile(!showProfile);
@@ -54,15 +55,15 @@ export default function NavAdmin() {
                     <input className={style.search} type="text" placeholder="Buscar" />
                     <img src={search} style={{ position: 'relative', cursor: 'pointer', right: '10px', bottom: '6px' }} alt="Buscar" />
                 </div>
-                <a onClick={() => navigate('/')}>Inicio</a>
-                <a onClick={() => navigate('/graph')}>Gráficas</a>
-                <a onClick={() => navigate('/')}>Datos</a>
-                <a onClick={() => navigate('/agregarplanta')}>Añadir <img src={plus} alt="Añadir" /></a>
+           
+                <a onClick={() => navigate('/admin')}>Inicio</a>
+                <a onClick={() => navigate('/adminData')}>Datos</a>
+                <a onClick={() => navigate('/addAdmin')}>Añadir <img src={plus} alt="Añadir" /></a>
 
                 {/* Contenedor del perfil en dispositivos móviles */}
                 {showProfile && (
                     <div className={style.profileContainerMovil}>
-                        <ProfileCard name="Nombre Completo" email="Correo electrónico" />
+                        <ProfileCard name="Nombre Completo" email={emailU}/>
                     </div>
                 )}
                 <div className={style.user}>
@@ -73,7 +74,7 @@ export default function NavAdmin() {
             {/* Contenedor del perfil */}
             {showProfile && (
                 <div className={style.profileContainer}>
-                    <ProfileCard name="Nombre Completo" email="Correo electrónico" />
+                    <ProfileCard name="Nombre Completo" email={emailU}/>
                 </div>
             )}
         </div>

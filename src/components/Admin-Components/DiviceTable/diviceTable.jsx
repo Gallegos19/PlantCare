@@ -1,21 +1,36 @@
 import React, { useEffect, useState } from 'react';
-import style from "./diviceTable.module.css"
-import { fetchDevice } from '../../../utils/RequestPlant/requestPlant';
-
-const mockDevices = [
-  { id: '00:1A:C2:7B:00:47', userName: 'John Doe', plant: 'Rosa' },
-  { id: '00:1A:C2:7B:00:48', userName: 'Jane Smith', plant: 'Tulipán' },
-  { id: '00:1A:C2:7B:00:49', userName: 'Alice Johnson', plant: 'Orquídea' }
-];
+import style from "./diviceTable.module.css";
+import { fetchDevice, fetchDeleteDeviceByMac } from '../../../utils/RequestPlant/requestPlant';
+import { MdOutlineDeleteSweep } from "react-icons/md";
+import { CiEdit } from "react-icons/ci";
 
 export default function DeviceTable() {
-  const [devices, setDevices] = useState(mockDevices);
+  const [devices, setDevices] = useState([]);
+
+  const handleDelete = async (mac) => {
+    const peticion = await fetchDeleteDeviceByMac(mac)
+    if(peticion){
+      console.log(peticion);
+      alert(`Dispositivo ${mac} eliminado`);
+      window.location.reload();
+    }
+    else{
+      alert('ocurrio un error')
+    }
+    // Aquí puedes agregar la lógica para eliminar el dispositivo
+  };
 
   useEffect(() => {
-    // Reemplaza con la URL de tu API
-    fetch('/api/devices')
-      .then(response => response.json())
-      .then(data => setDevices(data));
+    const fetchData = async () => {
+      try {
+        const response = await fetchDevice();
+        setDevices(response); // Asumiendo que response es un array de dispositivos
+      } catch (error) {
+        console.error('Error fetching devices:', error);
+      }
+    };
+
+    fetchData();
   }, []);
 
   return (
@@ -25,16 +40,24 @@ export default function DeviceTable() {
         <thead>
           <tr>
             <th>ID (MAC)</th>
-            <th>Nombre de Usuario</th>
+            <th>Correo de Usuario</th>
             <th>Planta</th>
+            <th>Opciones</th>
           </tr>
         </thead>
         <tbody>
           {devices.map(device => (
             <tr key={device.id}>
-              <td>{device.id}</td>
-              <td>{device.userName}</td>
-              <td>{device.plant}</td>
+              <td data-label="ID (MAC)">{device.mac}</td>
+              <td data-label="Correo de Usuario">{device.user.email}</td>
+              <td data-label="Planta">{device.plant.name}</td>
+              <td data-label="Opciones">
+                <MdOutlineDeleteSweep
+                  color='green'
+                  size={25}
+                  onClick={() => handleDelete(device.mac)}
+                />
+              </td>
             </tr>
           ))}
         </tbody>
