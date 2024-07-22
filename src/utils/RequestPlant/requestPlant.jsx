@@ -93,4 +93,91 @@ export const createPlant = async (plantData) => {
       throw error;
     }
   };
+
+
+  export const createDevice = async (deviceData) => {
+    try {
+      const response = await fetch("http://44.197.7.97:8081/api/device", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          correo: deviceData.user.email, 
+          name_plant: deviceData.name,
+          mac: deviceData.mac
+        }),
+      });
+  
+      const data = await response.json();
+  
+      if (!response.ok || !data.success) {
+        throw new Error(data.message || "Error desconocido");
+      }
+  
+      return data;
+    } catch (error) {
+      console.error("Hubo un problema con la operación fetch:", error);
+      throw error;
+    }
+  };
+  
+export const fetchDevice = async () => {
+    try {
+        const response = await fetch("http://44.197.7.97:8081/api/device");
+        if (!response.ok) {
+            throw new Error("Network response was not ok " + response.statusText);
+        }
+        const data = await response.json();
+        console.log(data.data)
+        return data.data;
+     
+    } catch (error) {
+        console.error("There was a problem with the fetch operation:", error);
+        throw error;
+    }
+};
+
+
+export const fetchDeviceByemail = async () => {
+    try {
+        const email = localStorage.getItem('userEmail');
+        const response = await fetch(`http://44.197.7.97:8081/api/device/email?email=${email}`);
+        if (!response.ok) {
+            throw new Error("Network response was not ok " + response.statusText);
+        }
+        const data = await response.json();
+        console.log("Data fetched:", data);
+        return data.data; // Asegúrate de que `data.data` contiene la lista de plantas
+    } catch (error) {
+        console.error("There was a problem with the fetch operation:", error);
+        throw error;
+    }
+};
+
+
+export const fetchLogin = async (UserData) => {
+    try {
+      const response = await fetch("http://44.197.7.97:8081/api/auth/authenticate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: UserData.email,
+          password: UserData.password
+        }),
+      });
+  
+      if (!response.ok) {
+        throw new Error("Network response was not ok " + response.statusText);
+      }
+  
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("There was a problem with the fetch operation:", error);
+      throw error;
+    }
+  };
   
