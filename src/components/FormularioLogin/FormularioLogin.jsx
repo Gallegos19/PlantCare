@@ -73,11 +73,11 @@ const FormularioLogin = forwardRef((props, ref) => {
       <div onClick={handleEntrar}>
         <Button title='Entrar'/>
       </div>
-      <div onClick={() => navigate('/register')}>
+      {/* <div onClick={() => navigate('/register')}>
         <p className={Style.text}>
           ¿Aún no estás registrado? Regístrate aquí
         </p>
-      </div>
+      </div> */}
       <Snackbar open={alertOpen} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
           {alertMessage}

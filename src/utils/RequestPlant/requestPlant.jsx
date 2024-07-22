@@ -121,6 +121,35 @@ export const createPlant = async (plantData) => {
       throw error;
     }
   };
+
+  export const createUser = async (userData) => {
+    try {
+      const response = await fetch("http://44.197.7.97:8081/api/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: userData.user.email, 
+          name: userData.name,
+          last_name: userData.last_name,
+          password: userData.password,
+          rol: userData.rol
+        }),
+      });
+  
+      const data = await response.json();
+  
+      if (!response.ok || !data.success) {
+        throw new Error(data.message || "Error desconocido");
+      }
+  
+      return data;
+    } catch (error) {
+      console.error("Hubo un problema con la operación fetch:", error);
+      throw error;
+    }
+  };
   
 export const fetchDevice = async () => {
     try {
@@ -160,6 +189,62 @@ export const fetchDeviceByemail = async () => {
     }
 };
 
+
+
+export const fetchDeleteDeviceByMac = async (mac) => {
+  try {
+    // Cambia el método a DELETE
+    const response = await fetch(`http://44.197.7.97:8081/api/device/mac?macAddress=${mac}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    // Verifica si la respuesta es correcta
+    if (!response.ok) {
+      throw new Error("Network response was not ok " + response.statusText);
+    }
+
+    // Si es necesario, puedes analizar la respuesta
+    const data = await response.json();
+    console.log("Device deleted successfully:", data); // Verifica la respuesta de la eliminación
+
+    // Retorna la respuesta si necesitas manejarla más adelante
+    return data;
+  } catch (error) {
+    console.error("There was a problem with the fetch operation:", error);
+    throw error;
+  }
+};
+
+
+export const fetchDeletePlantById = async (id) => {
+  try {
+    // Cambia el método a DELETE
+    const response = await fetch(`http://44.197.7.97:8081/api/plant/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    // Verifica si la respuesta es correcta
+    if (!response.ok) {
+      throw new Error("Network response was not ok " + response.statusText);
+    }
+
+    // Si es necesario, puedes analizar la respuesta
+    const data = await response.json();
+    console.log("Device deleted successfully:", data); // Verifica la respuesta de la eliminación
+
+    // Retorna la respuesta si necesitas manejarla más adelante
+    return data;
+  } catch (error) {
+    console.error("There was a problem with the fetch operation:", error);
+    throw error;
+  }
+};
 
 
 

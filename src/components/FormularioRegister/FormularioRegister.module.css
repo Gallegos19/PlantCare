@@ -1,7 +1,9 @@
 .containerForm{
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 70%;
+    margin: auto;
+    justify-content: center;
     align-items: center;
     gap: 0.5em;
 }
@@ -13,6 +15,20 @@
     cursor: pointer;
 
 }
+.section{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+}
+.inputSection {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    align-items: center;
+
+}
 .link{
     display: flex;
     width: 15vw;
@@ -22,6 +38,15 @@
     text-decoration: none;
 }
 @media (max-width: 768px) {
+    .containerForm{ width: 100%;}
+    .section, .inputSection{
+        flex-direction: column;
+    }
+    .inputSection{
+        width: 100%;
+        margin: 0 auto;
+
+    }
     .text{
         width: 35vw;
     }

@@ -17,7 +17,7 @@ export default function AddAdmin() {
                 navigate("/agregarplantaadmin");
                 break;
             case "usuario":
-                navigate("/register");
+                navigate("/add-user");
                 break;
             case "dispositivo":
                 navigate("/addDevice");
@@ -36,7 +36,7 @@ export default function AddAdmin() {
                 <div className={style.cardsContainer}>
                     <AddCard title="Agregar Planta" onClick={() => handleCardClick("planta")} icon={<GiPlantRoots />} />
                     <AddCard title="Agregar Usuario" onClick={() => handleCardClick("usuario")} icon={<FaUserCheck />} />
-                    <AddCard title="Agregar Dispositivo" onClick={() => handleCardClick("dispositivo")} icon={<BsDeviceHdd />} />
+                    {/* <AddCard title="Agregar Dispositivo" onClick={() => handleCardClick("dispositivo")} icon={<BsDeviceHdd />} /> */}
                 </div>
             </main>
             <footer>

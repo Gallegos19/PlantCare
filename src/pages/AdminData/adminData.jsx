@@ -14,11 +14,20 @@ export default function AdminData(){
             </nav>
 
             <main className={style.mainContent}>
-            <h1>Datos de Usuarios</h1>
-                <GenderPieChart />
-                <UserGrowthChart />
-                <PlantPreferencePieChart />
-                <GenderPlantPreferenceChart />
+            <h1 style={{fontFamily:'Poppins'}}>Datos de Usuarios</h1>
+            <div className={style.chartContainer}>
+                <div className={style.section}>
+                    <GenderPieChart />
+                    <UserGrowthChart />
+                </div>
+                <div className={style.section}>
+                    <PlantPreferencePieChart />
+                    <GenderPlantPreferenceChart />
+                </div>
+               
+                
+            </div>
+               
 
             </main>
 
