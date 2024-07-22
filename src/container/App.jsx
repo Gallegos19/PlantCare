@@ -16,12 +16,26 @@ import SpecificGraph from '../pages/SpecificGraph/specificGraph';
 import Data from '../pages/stadisticalData/stadisticalData';
 import { PlantProvider } from '../components/PlantContext/plantContext';
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+
+  useEffect(() => {
+    const token = localStorage.getItem("jwt");
+    console.log(token);
+    if (token) {
+      setIsAuthenticated(true);
+    }
+  }, []);
 
   return (
     <PlantProvider>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          {isAuthenticated ? (
+            <>
+           <Route path='/' element={<Home />} />
           <Route path='/admin' element={<Admin />} />
           <Route path='/specific/:plantName' element={<SpecificPlant />} />
           <Route path='/graph' element={<Graph />} />
@@ -29,11 +43,11 @@ function App() {
           <Route path="/data" element={<Data />} />
           <Route path='/addAdmin' element={<AddAdmin />} />
           <Route path='/specificGraph/' element={<SpecificGraph />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
           <Route path="/agregarplanta" element={<AgregarPlanta />} />
           <Route path="/agregarplantaadmin" element={<AgregarPlantaAdmin />} />
           <Route path="/addDevice" element={<AddDevice />} />
+            </>
+          ) : null}
         </Routes>
       </BrowserRouter>
     </PlantProvider>
