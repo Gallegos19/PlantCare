@@ -47,6 +47,7 @@
     width: 100%;
     border-collapse: collapse;
     margin: 2vw 0;
+    
   }
   
   table, th, td {
@@ -72,6 +73,21 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 2vw;
+  }
+
+  @media (max-width: 600px) {
+    .tableContainer {
+      width: 100%;
+    }
+  
+    .tableTitle {
+      font-size: 18px;
+    }
+  
+    th, td {
+      padding: 2px;
+      font-size: 12px;
+    }
   }
   
   

@@ -13,8 +13,13 @@ import Admin from '../pages/Admin/admin';
 import AddAdmin from '../pages/AddAdmin/addAdmin';
 import AddDevice from '../pages/AddDevice/addDevice';
 import SpecificGraph from '../pages/SpecificGraph/specificGraph';
-import Data from '../pages/stadisticalData/stadisticalData';
+
+
 import AddUser from '../pages/AddUser/AddUser';
+
+import DataClient from '../pages/StadisticalDataClient/dataClient';
+import Data from '../components/stadisticalData/stadisticalData';
+
 import { PlantProvider } from '../components/PlantContext/plantContext';
 
 function App() {
@@ -37,17 +42,19 @@ function App() {
           <Route path='/add-user' element={<AddUser /> } />
           {isAuthenticated ? (
             <>
+
               <Route path='/' element={<Home />} />
-              
               <Route path='/specific/:plantName' element={<SpecificPlant />} />
               <Route path='/graph' element={<Graph />} />
               <Route path='/adminData' element={<AdminData />} />
-              <Route path="/data" element={<Data />} />
               <Route path='/addAdmin' element={<AddAdmin />} />
               <Route path='/specificGraph/' element={<SpecificGraph />} />
               <Route path="/agregarplanta" element={<AgregarPlanta />} />
               <Route path="/agregarplantaadmin" element={<AgregarPlantaAdmin />} />
               <Route path="/addDevice" element={<AddDevice />} />
+              <Route path="/dataClient" element={<DataClient />} />
+              <Route path='/stadistical/:plantName' element={<Data />} />
+       
             </>
           ) : (
             <Route path="*" element={<Navigate to="/login" replace />} />
