@@ -1,0 +1,77 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+   margin: 2vw;
+}
+
+.container{
+
+  margin: 0 auto;
+  text-align: center;
+}
+
+.Jardin {
+    font-family: 'Poppins', sans-serif;
+    color: rgba(39, 18, 2, 1);
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    font-size: 30px;  
+}
+
+.selectContainer {
+    font-family: 'Poppins', sans-serif;
+    color: rgba(39, 18, 2, 1);
+    display: flex;
+    align-items: center;
+}
+
+.selectContainer select {
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    background-color:#FBF6F6;
+    width: 185px;
+    height: 34px;
+    cursor: pointer;
+}
+
+.tableContainer {
+    margin: 2vw auto;
+    width: 80%;
+    text-align: center;
+  }
+  
+  .tableTitle {
+    color: rgb(19, 133, 19);
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2vw 0;
+  }
+  
+  table, th, td {
+    border: 1px solid #ddd;
+  }
+  
+  th {
+    padding: 8px;
+    text-align: center;
+    background-color: #f2f2f2;
+    color: gray;
+  }
+  
+  td {
+    padding: 8px;
+    text-align: center;
+    color: rgb(19, 133, 19);
+  }
+  
+
+.advancedAnalysis {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2vw;
+  }
+  
+  
