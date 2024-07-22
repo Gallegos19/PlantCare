@@ -59,7 +59,7 @@ export default function SpecificPlant() {
                 <div className={style.plantInfo}>
                     <div>
                         <h2>{plant.name}</h2>
-                        <img src={plant.image} alt={plant.name} className={style.plantImage} />
+                        <img src={plant.url_image_plant} alt={plant.name} className={style.plantImage} />
                     </div>
 
                     <div className={style.cardContent}>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import style from "./diviceTable.module.css"
+import { fetchDevice } from '../../../utils/RequestPlant/requestPlant';
 
 const mockDevices = [
   { id: '00:1A:C2:7B:00:47', userName: 'John Doe', plant: 'Rosa' },

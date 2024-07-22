@@ -6,6 +6,7 @@ import Style from "./FormularioPlanta.module.css";
 import { createPlant,fetchCategories, fetchTypes, fetchFamilies} from "../../utils/RequestPlant/requestPlant";
 import { useNavigate } from "react-router-dom";
 import { Snackbar, Alert } from "@mui/material";
+import ImageUploader from "../ImageUploader/ImageUploader";
 
 const FormularioPlanta = forwardRef((props, ref) => {
   const [nombreCientifico, setNombreCientifico] = useState("");
@@ -23,6 +24,7 @@ const FormularioPlanta = forwardRef((props, ref) => {
   const [categories, setCategories] = useState([]);
   const [types, setTypes] = useState([]);
   const [families, setFamilies] = useState([]);
+  const [imageUrl, setImageUrl] = useState("");
   const navigate = useNavigate();
 
   useImperativeHandle(ref, () => ({
@@ -68,15 +70,16 @@ const FormularioPlanta = forwardRef((props, ref) => {
         ambient_temperature: temperatura,
         mq135: gas,
         humidity_environment: temperaturaTierra,
-        categories: [categoria], // aseguramos que las categorías sean enviadas como un array
-        types: [tipo], // aseguramos que los tipos sean enviados como un array
-        families: [familia], // aseguramos que las familias sean enviadas como un array
+        categories: [categoria],
+        types: [tipo],
+        families: [familia],
+        url_image_plant: imageUrl 
       };
-
+  
       try {
         const response = await createPlant(plantData);
         console.log("Plant created successfully:", response);
-        navigate("/"); // Navegar a la página de inicio u otra página
+        navigate("/"); // Navigate to the home page or another page
       } catch (error) {
         console.error("Error creating plant:", error);
         setAlertMessage("Hubo un error al crear la planta.");
@@ -166,6 +169,7 @@ const FormularioPlanta = forwardRef((props, ref) => {
           />
         </div>
       </div>
+      <ImageUploader bandera='true' setImageUrl={setImageUrl} />
       <div onClick={handleEntrar}>
         <Button title="Guardar" />
       </div>

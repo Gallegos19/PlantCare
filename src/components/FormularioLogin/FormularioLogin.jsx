@@ -4,6 +4,7 @@ import Button from '../Button/Button';
 import Style from './FormularioLogin.module.css';
 import { useNavigate } from 'react-router-dom';
 import { Snackbar, Alert } from '@mui/material';
+import { fetchLogin } from '../../utils/RequestPlant/requestPlant';
 
 const FormularioLogin = forwardRef((props, ref) => {
   const [username, setUsername] = useState('');
@@ -22,15 +23,29 @@ const FormularioLogin = forwardRef((props, ref) => {
     }
   }));
 
-  const handleEntrar = () => {
+  const handleEntrar = async () => {
     // Validar que ambos campos estén llenos
     if (username.trim() !== '' && contrasena.trim() !== '') {
-      navigate('/');
+      try {
+        const response = await fetchLogin({ email: username, password: contrasena });
+        if (response.success) {
+          // Guardar el correo en localStorage
+          localStorage.setItem('userEmail', username);
+          navigate('/');
+        } else {
+          setAlertMessage('Credenciales incorrectas.');
+          setAlertOpen(true);
+        }
+      } catch (error) {
+        setAlertMessage('Hubo un problema con la autenticación.');
+        setAlertOpen(true);
+      }
     } else {
       setAlertMessage('Por favor, completa todos los campos.');
       setAlertOpen(true);
     }
   };
+  
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -53,18 +68,14 @@ const FormularioLogin = forwardRef((props, ref) => {
         value={contrasena}
         onChange={(newValue) => setContrasena(newValue)}
       />
-
-        <div onClick={handleEntrar} >
+      <div onClick={handleEntrar}>
         <Button title='Entrar'/>
-        </div>
-     
-
+      </div>
       <div onClick={() => navigate('/register')}>
         <p className={Style.text}>
           ¿Aún no estás registrado? Regístrate aquí
         </p>
       </div>
-
       <Snackbar open={alertOpen} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
           {alertMessage}
