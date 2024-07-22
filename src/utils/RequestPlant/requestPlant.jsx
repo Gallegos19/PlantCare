@@ -139,6 +139,8 @@ export const fetchDevice = async () => {
 };
 
 
+
+
 export const fetchDeviceByemail = async () => {
     try {
         const email = localStorage.getItem('userEmail');
@@ -147,13 +149,18 @@ export const fetchDeviceByemail = async () => {
             throw new Error("Network response was not ok " + response.statusText);
         }
         const data = await response.json();
-        console.log("Data fetched:", data);
-        return data.data; // Asegúrate de que `data.data` contiene la lista de plantas
+        console.log("Fetched data:", data); // Verifica los datos
+        // Extrae las plantas del array plant_records
+        const plants = data.data.map(device => device.plant).filter(plant => plant); 
+        console.log("Plants extracted:", plants); // Verifica las plantas extraídas
+        return plants;
     } catch (error) {
         console.error("There was a problem with the fetch operation:", error);
         throw error;
     }
 };
+
+
 
 
 export const fetchLogin = async (UserData) => {
