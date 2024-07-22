@@ -8,7 +8,7 @@ import PlantContext from "../../components/PlantContext/plantContext"
 export default function Home() {
   const { plants } = useContext(PlantContext);
 
-  console.log("Plants in Home:", plants); // Verifica los datos de plantas
+  console.log("Plants in Home:", plants); 
 
   return (
     <div className={style.container}>

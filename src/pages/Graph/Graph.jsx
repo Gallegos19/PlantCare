@@ -1,4 +1,4 @@
-import {React,useState,useEffect,useContext} from "react";
+import { React, useState, useEffect, useContext } from "react";
 import Nav from "../../components/nav/nav";
 import CardListGraph from "../../components/graph/cardListGraph/cardListGraph";
 import Footer from "../../components/footer/footer";
@@ -13,9 +13,9 @@ export default function Graph() {
     useEffect(() => {
         const loadPlants = () => {
             try {
-                
+
                 const localStoragePlants = JSON.parse(localStorage.getItem('plants')) || [];
-                
+
                 if (localStoragePlants.length > 0) {
                     // Si hay datos en localStorage, usarlos
                     setLoading(false);
@@ -39,9 +39,14 @@ export default function Graph() {
 
     return (
         <div className={style.container}>
+
             <Nav />
+            <div className={style.header}>
+                <h1 className={style.Jardin}>Graficas</h1>
+                <div />
+            </div>
             <CardListGraph plants={plants} />
             <Footer />
-        </div>
+        </div >
     );
 }
