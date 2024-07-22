@@ -35,7 +35,7 @@ export default function Nav() {
 
                 <a onClick={() => navigate('/')}>Inicio</a>
                 <a onClick={() => navigate('/graph')}>Gráficas</a>
-                <a onClick={() => navigate('/data')}>Datos</a>
+                <a onClick={() => navigate('/dataClient')}>Datos</a>
                 <a onClick={() => navigate('/agregarplanta')}>Añadir <img src={plus} alt="Añadir" /></a>
 
                 <div className={style.user}>

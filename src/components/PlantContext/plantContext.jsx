@@ -1,4 +1,4 @@
-// PlantProvider.js
+
 import React, { createContext, useState, useEffect } from "react";
 import { fetchDeviceByemail } from "../../utils/RequestPlant/requestPlant";
 
@@ -11,9 +11,9 @@ export function PlantProvider({ children }) {
     const loadPlants = async () => {
       try {
         const plantData = await fetchDeviceByemail();
-        console.log("Plants loaded in context:", plantData); // Verifica los datos
+        console.log("Plants loaded in context:", plantData); 
         setPlants(plantData);
-        localStorage.setItem('plants', JSON.stringify(plantData)); // Opcional
+        localStorage.setItem('plants', JSON.stringify(plantData)); 
       } catch (error) {
         console.error("Error loading plants:", error);
       }
