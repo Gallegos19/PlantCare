@@ -11,6 +11,11 @@ export default function CardList({ plants }) {
     navigate(`/specific/${name}`);
   };
 
+  // Verifica si plants es un array
+  if (!Array.isArray(plants)) {
+    return <p>No plants available.</p>;
+  }
+
   return (
     <div className={style.cardList}>
       {plants.map((plant) => (

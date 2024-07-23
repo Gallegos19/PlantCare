@@ -1,14 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Card from "../../homeComponent/card/card";
 import style from "./cardListGraph.module.css";
 import Graphics from "../graphics/graphics";
 import { RiCloseCircleFill } from "react-icons/ri";
-
-export default function     CardListGraph({ plants }) {
+import PlantContext from "../../PlantContext/plantContext";
+export default function CardListGraph({ plants }) {
     const [selectedPlant, setSelectedPlant] = useState(null);
+    const { loadPlantRecordsByMac } = useContext(PlantContext); // Accede a la función para cargar datos por MAC
 
-    const handleCardClick = (plant) => {
+    const handleCardClick = async (plant) => {
+        console.log("Selected Plant:", plant);
         setSelectedPlant(plant);
+        try {
+            await loadPlantRecordsByMac(plant.mac); // Carga registros de la planta seleccionada usando su MAC
+        } catch (error) {
+            console.error("Error loading plant records:", error);
+        }
     };
 
     const handleCloseGraphs = () => {
@@ -17,11 +24,12 @@ export default function     CardListGraph({ plants }) {
 
     return (
         <div className={style.cardList}>
-            {plants.map((plant, index) => (
-                <div key={index} className={style.cardWrapper} onClick={() => handleCardClick(plant)}>
+            {plants.map((plant) => (
+                <div key={plant.id} className={style.cardWrapper} onClick={() => handleCardClick(plant)}>
                     <Card name={plant.name} imageUrl={plant.url_image_plant} />
                 </div>
             ))}
+
             {selectedPlant && (
                 <div className={style.containerGraph}>
                     <div className={style.closeButton} onClick={handleCloseGraphs}>
@@ -29,7 +37,7 @@ export default function     CardListGraph({ plants }) {
                     </div>
                     <div className={style.graphsContainer}>
                         <h2>{selectedPlant.name}</h2>
-                        <Graphics plant={selectedPlant} />
+                        <Graphics plantMac={selectedPlant.mac} /> {/* Pasar MAC al componente Graphics */}
                     </div>
                 </div>
             )}

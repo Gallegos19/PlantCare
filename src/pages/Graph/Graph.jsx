@@ -8,31 +8,29 @@ import PlantContext from "../../components/PlantContext/plantContext";
 export default function Graph() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const { plants } = useContext(PlantContext); // Obtén las plantas del contexto
+    const { plants } = useContext(PlantContext); 
 
+    
     useEffect(() => {
-        const loadPlants = () => {
-            try {
-
-                const localStoragePlants = JSON.parse(localStorage.getItem('plants')) || [];
-
-                if (localStoragePlants.length > 0) {
-                    // Si hay datos en localStorage, usarlos
-                    setLoading(false);
-                } else {
-                    // Si no hay datos en localStorage, usar el contexto
-                    if (plants.length > 0) {
-                        setLoading(false);
-                    }
-                }
-            } catch (error) {
-                setError(error.message);
-                setLoading(false);
+        const loadPlants = async () => {
+          try {
+            const localStoragePlants = JSON.parse(localStorage.getItem('plants')) || [];
+            if (localStoragePlants.length > 0) {
+              setLoading(false);
+            } else {
+              // Aquí podrías hacer una llamada a una API si es necesario
+              setLoading(false);
             }
+          } catch (error) {
+            setError(error.message);
+            setLoading(false);
+          }
         };
-
+      
         loadPlants();
-    }, [plants]); // Ejecutar el efecto cada vez que cambien las plantas en el contexto
+      }, []); // No dependas de `plants`
+      
+  
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error}</p>;

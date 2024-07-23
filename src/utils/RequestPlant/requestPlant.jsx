@@ -185,23 +185,49 @@ export const fetchUsers = async () => {
 
 
 export const fetchDeviceByemail = async () => {
-    try {
-        const email = localStorage.getItem('userEmail');
-        const response = await fetch(`http://44.197.7.97:8081/api/device/email?email=${email}`);
-        if (!response.ok) {
-            throw new Error("Network response was not ok " + response.statusText);
-        }
-        const data = await response.json();
-        console.log("Fetched data:", data); // Verifica los datos
-        // Extrae las plantas del array plant_records
-        const plants = data.data.map(device => device.plant).filter(plant => plant); 
-        console.log("Plants extracted:", plants); // Verifica las plantas extraídas
-        return plants;
-    } catch (error) {
-        console.error("There was a problem with the fetch operation:", error);
-        throw error;
-    }
+  try {
+      const email = localStorage.getItem('userEmail');
+      const response = await fetch(`http://44.197.7.97:8081/api/device/email?email=${email}`);
+      
+      if (!response.ok) {
+          throw new Error("Network response was not ok " + response.statusText);
+      }
+      
+      const data = await response.json();
+      console.log("Fetched data:", data); // Verifica los datos
+      
+      // Extrae las plantas y la MAC de cada dispositivo
+      const plants = data.data.map(device => ({
+          ...device.plant,
+          mac: device.mac  // Incluye la MAC en cada planta
+      })).filter(plant => plant);
+      
+      console.log("Plants extracted:", plants); // Verifica las plantas extraídas
+      
+      return { plants, macs: data.data.map(device => ({ plantId: device.plant.id, mac: device.mac })) };
+  } catch (error) {
+      console.error("There was a problem with the fetch operation:", error);
+      throw error;
+  }
 };
+
+
+
+export const fetchDeviceByMac = async (mac) => {
+  try {
+    const response = await fetch(`http://44.197.7.97:8081/api/device/mac?macAddress=${mac}`);
+    if (!response.ok) {
+      throw new Error("Network response was not ok " + response.statusText);
+    }
+    const data = await response.json();
+    console.log("Fetched data by MAC:", data); // Verifica los datos
+    return data.data;
+  } catch (error) {
+    console.error("There was a problem with the fetch operation:", error);
+    throw error;
+  }
+};
+
 
 
 

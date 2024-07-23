@@ -53,7 +53,7 @@ const FormularioPlantaCliente = forwardRef((props, ref) => {
           categories: plant.categories,
           types: plant.types,
           families: plant.families,
-          imageUrl: plant.url_image_plant // Asegúrate de que el campo se llame url_image_plant
+          imageUrl: plant.url_image_plant 
         })));
       } catch (error) {
         console.error("Error fetching plants:", error);
