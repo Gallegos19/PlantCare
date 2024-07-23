@@ -1,5 +1,6 @@
 import React from 'react';
 import style from "../stadisticalData.module.css"
+import PlantContext from '../../PlantContext/plantContext';
 
 const calculateStatistics = (data) => {
   const mean = data.reduce((acc, value) => acc + value, 0) / data.length;

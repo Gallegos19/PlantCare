@@ -7,6 +7,7 @@ export function PlantProvider({ children }) {
   const [plants, setPlants] = useState([]);
   const [macs, setMacs] = useState([]);
   const [selectedPlantRecords, setSelectedPlantRecords] = useState([]);
+  const [loadedMacs, setLoadedMacs] = useState(new Set()); // Estado para MACs ya cargadas
 
   useEffect(() => {
     const loadPlants = async () => {
@@ -34,12 +35,15 @@ export function PlantProvider({ children }) {
   };
 
   const loadPlantRecordsByMac = async (mac) => {
+    if (loadedMacs.has(mac)) return; // Evitar carga redundante
+
     try {
       const plantData = await fetchDeviceByMac(mac);
       if (plantData && plantData.plant_records) {
         setSelectedPlantRecords(plantData.plant_records);
         localStorage.setItem('plantRecords', JSON.stringify(plantData.plant_records));
-        console.log("estio es "+plantData.plant_records)
+        setLoadedMacs((prevLoadedMacs) => new Set(prevLoadedMacs).add(mac)); // Marcar MAC como cargada
+        console.log("estio es", JSON.stringify(plantData.plant_records, null, 2));
       } else {
         console.error("No plant records found");
       }

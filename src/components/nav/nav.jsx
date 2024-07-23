@@ -58,7 +58,7 @@ export default function Nav() {
                 </div>
                 <a onClick={() => navigate('/')}>Inicio</a>
                 <a onClick={() => navigate('/graph')}>Gráficas</a>
-                <a onClick={() => navigate('/data')}>Datos</a>
+                <a onClick={() => navigate('/dataClient')}>Datos</a>
                 <a onClick={() => navigate('/agregarplanta')}>Añadir <img src={plus} alt="Añadir" /></a>
 
                 {/* Contenedor del perfil en dispositivos móviles */}
