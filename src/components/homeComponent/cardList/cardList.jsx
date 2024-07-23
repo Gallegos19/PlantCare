@@ -7,7 +7,8 @@ import style from "./cardList.module.css";
 export default function CardList({ plants }) {
   const navigate = useNavigate();
 
-  const handleCardClick = (name) => {
+  const handleCardClick = (name,mac) => {
+    localStorage.setItem('device', mac)
     navigate(`/specific/${name}`);
   };
 
@@ -19,7 +20,7 @@ export default function CardList({ plants }) {
   return (
     <div className={style.cardList}>
       {plants.map((plant) => (
-        <div key={plant.id} className={style.cardWrapper} onClick={() => handleCardClick(plant.name)}>
+        <div key={plant.id} className={style.cardWrapper} onClick={() => handleCardClick(plant.name, plant.mac)}>
           <Card 
             name={plant.name} 
             imageUrl={plant.url_image_plant} 

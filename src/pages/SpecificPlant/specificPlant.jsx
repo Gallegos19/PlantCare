@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { io } from "socket.io-client";
 import Nav from "../../components/nav/nav";
 import Footer from "../../components/footer/footer";
 import style from "./specificPlant.module.css";
@@ -11,21 +12,21 @@ import Partly from "../../assets/partly_cloudy_day.png";
 import Sun from "../../assets/sun.png";
 import Wet from "../../assets/wet.png";
 
-
 export default function SpecificPlant() {
     const { plantName } = useParams();
     const [plant, setPlant] = useState(null);
     const [currentDate, setCurrentDate] = useState(new Date());
     const [isOpen, setIsOpen] = useState(false);
+    const [socket, setSocket] = useState(null); // Estado para almacenar la conexión del socket
+    const device = localStorage.getItem('device'); // Obtener la dirección MAC del dispositivo desde el localStorage
 
     useEffect(() => {
         const getPlant = () => {
             try {
-                // Leer datos del localStorage
                 const plantsData = JSON.parse(localStorage.getItem('plants')) || [];
-                console.log("Fetched plants data from localStorage:", plantsData); // Debugging line
+                console.log("Fetched plants data from localStorage:", plantsData);
                 const specificPlant = plantsData.find(p => p.name === plantName);
-                console.log("Specific plant found:", specificPlant); // Debugging line
+                console.log("Specific plant found:", specificPlant);
                 setPlant(specificPlant);
             } catch (error) {
                 console.error("Error reading plant data from localStorage:", error);
@@ -34,6 +35,25 @@ export default function SpecificPlant() {
 
         getPlant();
     }, [plantName]);
+
+    useEffect(() => {
+        if (device) {
+            const socketConexion = io('https://plantcaresocket.integrador.xyz/');
+
+            setSocket(socketConexion);
+
+            socketConexion.on('connect', () => {
+                console.log('Conectado a Socket.IO');
+                socketConexion.emit('join', 'boton'); // Unirse a la sala "plantRoom"
+            });
+
+
+            return () => {
+                socketConexion.disconnect();
+                console.log('Desconectado de Socket.IO');
+            };
+        }
+    }, [device]);
 
     const handlePreviousDay = () => {
         setCurrentDate((prevDate) => new Date(prevDate.setDate(prevDate.getDate() - 1)));
@@ -50,6 +70,12 @@ export default function SpecificPlant() {
     const formatDate = (date) => {
         const options = { day: 'numeric', month: 'short', year: 'numeric' };
         return date.toLocaleDateString('es-ES', options);
+    };
+
+    const handleRegar = () => {
+        if (socket) {
+            socket.emit('chat message',device+','+1,'boton','yo'); // Enviar la señal para regar la planta
+        }
     };
 
     return (
@@ -125,12 +151,12 @@ export default function SpecificPlant() {
                                 </div>
 
                                 <div className={style.buttons}>
-                                    <button>Regar ahora</button>
+                                    <button onClick={handleRegar}>Regar ahora</button>
                                     <button>Guardar</button>
                                 </div>
                             </div>
                         )}
-                         <div className={style.nextPageUp} onClick={toggleContainer}>
+                        <div className={style.nextPageUp} onClick={toggleContainer}>
                             <img
                                 src={NextPageIcon}
                                 alt=""
