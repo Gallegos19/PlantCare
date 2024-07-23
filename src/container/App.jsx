@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import '../App.css'
+import '../App.css';
 import Home from '../pages/Home/Home';
 import Login from '../pages/Login/Login';
 import Register from '../pages/Register/Register';
@@ -13,25 +13,28 @@ import Admin from '../pages/Admin/admin';
 import AddAdmin from '../pages/AddAdmin/addAdmin';
 import AddDevice from '../pages/AddDevice/addDevice';
 import SpecificGraph from '../pages/SpecificGraph/specificGraph';
-
-
 import AddUser from '../pages/AddUser/AddUser';
-
 import DataClient from '../pages/StadisticalDataClient/dataClient';
 import Data from '../components/stadisticalData/stadisticalData';
 import PlantRecordsContext from '../context/Context';
-
 import { PlantProvider } from '../components/PlantContext/plantContext';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem("jwt");
     if (token) {
+      // Aquí puedes agregar lógica adicional para validar el token si es necesario.
       setIsAuthenticated(true);
     }
+    setLoading(false);
   }, []);
+
+  if (loading) {
+    return <div>Loading...</div>; // Puedes reemplazar esto con un componente de carga.
+  }
 
   return (
     <PlantProvider>
@@ -54,7 +57,6 @@ function App() {
               <Route path="/addDevice" element={<AddDevice />} />
               <Route path="/dataClient" element={<DataClient />} />
               <Route path='/stadistical/:plantName' element={<Data />} />
-       
             </>
           ) : (
             <Route path="*" element={<Navigate to="/login" replace />} />
