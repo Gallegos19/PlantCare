@@ -8,14 +8,16 @@ import Input2 from "../Input/Input2";
 import { createUser } from "../../utils/RequestPlant/requestPlant";
 
 const FormularioRegister = forwardRef((props, ref) => {
-  const [email, setEmail] = useState("");
+  const [correo, setCorreo] = useState("");
   const [nombre, setNombre] = useState("");
   const [apellido, setApellido] = useState("");
   const [contrasena, setContrasena] = useState("");
   const [rol, setRol] = useState("");
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
+  const [gender, setGender ] = useState("");
   const navigate = useNavigate();
+  const token = localStorage.getItem('jwt')
 
   // Permite que el padre acceda al ref del formulario
   useImperativeHandle(ref, () => ({
@@ -30,20 +32,22 @@ const FormularioRegister = forwardRef((props, ref) => {
   const handleEntrar = async () => {
     // Validar que ambos campos estén llenos
     if (
-      email.trim() !== "" &&
+      correo.trim() !== "" &&
       contrasena.trim() !== "" &&
       nombre.trim() !== "" &&
       apellido.trim() !== "" &&
-      rol.trim() !== ""
+      rol.trim() !== "" &&
+      gender.trim() !== ""
     ) {
         const userData = {
             name: nombre,
             last_name: apellido,
-            email: email,
+            email: correo,
             password: contrasena,
             rol: rol,
+            gender: gender,
           };
-        const peticion = await createUser(userData)
+        const peticion = await createUser(userData, token)
         if(peticion){
             alert('creado')
             navigate("/admin");
@@ -83,9 +87,9 @@ const FormularioRegister = forwardRef((props, ref) => {
       />
       <Input
         texto="Correo"
-        type="email"
-        value={email}
-        onChange={(newValue) => setEmail(newValue)}
+        type="correo"
+        value={correo}
+        onChange={(newValue) => setCorreo(newValue)}
       />
         </div>
     
@@ -106,6 +110,16 @@ const FormularioRegister = forwardRef((props, ref) => {
           { value: "Cliente", label: "Cliente" },
         ]}
         onChange={(newValue) => setRol(newValue)}
+      />
+       <Input2
+        texto="Genero"
+        type="text"
+        value={gender}
+        options={[
+          { value: "H", label: "Hombre" },
+          { value: "M", label: "Mujer" },
+        ]}
+        onChange={(newValue) => setGender(newValue)}
       />
       </div>
 

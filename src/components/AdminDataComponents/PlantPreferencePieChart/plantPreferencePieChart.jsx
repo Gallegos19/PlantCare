@@ -6,11 +6,12 @@ const COLORS = ['#FFBB28', '#FF8042', '#0088FE', '#00C49F'];
 
 export default function PlantPreferencePieChart() {
   const [data, setData] = useState([]);
+  const token = localStorage.getItem('jwt')
 
   useEffect(() => {
     const getData = async () => {
       try {
-        const plants = await fetchPlants();
+        const plants = await fetchPlants(token);
         const plantCounts = plants.reduce((acc, plant) => {
           acc[plant.name] = (acc[plant.name] || 0) + 1;
           return acc;

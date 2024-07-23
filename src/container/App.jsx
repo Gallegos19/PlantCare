@@ -18,6 +18,7 @@ import DataClient from '../pages/StadisticalDataClient/dataClient';
 import Data from '../components/stadisticalData/stadisticalData';
 import PlantRecordsContext from '../context/Context';
 import { PlantProvider } from '../components/PlantContext/plantContext';
+import { fetchHealth } from '../utils/RequestPlant/requestPlant';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -26,10 +27,24 @@ function App() {
   useEffect(() => {
     const token = localStorage.getItem("jwt");
     if (token) {
-      // Aquí puedes agregar lógica adicional para validar el token si es necesario.
-      setIsAuthenticated(true);
+      fetchHealth(token)
+        .then((data) => {
+          console.log(data);
+          setIsAuthenticated(true);
+        })
+        .catch((error) => {
+          if (error.message === '403') {
+            console.error('Forbidden: Token is invalid or expired');
+          } else {
+            console.error('Error:', error);
+          }
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    } else {
+      setLoading(false);
     }
-    setLoading(false);
   }, []);
 
   if (loading) {
@@ -42,12 +57,12 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path='/admin' element={<Admin />} />
-          <Route path='/add-user' element={<AddUser /> } />
           {isAuthenticated ? (
             <>
               <Route path='/' element={<Home />} />
               <Route path='/specific/:plantName' element={<SpecificPlant />} />
+              <Route path='/admin' element={<Admin />} />
+              <Route path='/add-user' element={<AddUser /> } />
               <Route path='/graph' element={<Graph />} />
               <Route path='/adminData' element={<AdminData />} />
               <Route path='/addAdmin' element={<AddAdmin />} />
