@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import style from './userTable.module.css';
 
-export const fetchUsers = async () => {
+export const fetchUsers = async (token) => {
   try {
-      const response = await fetch("http://44.197.7.97:8081/api/users");
+      const response = await fetch("http://44.197.7.97:8081/api/users",{
+        method:"GET",
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
       if (!response.ok) {
           throw new Error("Network response was not ok " + response.statusText);
       }
@@ -19,11 +25,12 @@ export const fetchUsers = async () => {
 export default function UserTable() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const token = localStorage.getItem('jwt')
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetchUsers(); // Asegúrate de llamar a 'fetchUsers'
+        const response = await fetchUsers(token); // Asegúrate de llamar a 'fetchUsers'
         console.log("Fetched users:", response);
         setUsers(response); // Asumiendo que response es un array de usuarios
       } catch (error) {

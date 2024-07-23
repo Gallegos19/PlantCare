@@ -28,6 +28,7 @@ const FormularioPlantaCliente = forwardRef((props, ref) => {
   const [imageUrl, setImageUrl] = useState("");
   const navigate = useNavigate();
   const { addPlant } = useContext(PlantContext);
+  const token = localStorage.getItem('jwt')
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -39,7 +40,7 @@ const FormularioPlantaCliente = forwardRef((props, ref) => {
   useEffect(() => {
     const loadPlants = async () => {
       try {
-        const data = await fetchPlants();
+        const data = await fetchPlants(token);
         console.log("Plantas cargadas:", data);
         setPlants(data.map(plant => ({
           value: plant.name,
@@ -183,7 +184,7 @@ const FormularioPlantaCliente = forwardRef((props, ref) => {
       };
 
       try {
-        const deviceResponse = await createDevice(plantData);
+        const deviceResponse = await createDevice(plantData, token);
         console.log("Dispositivo creado exitosamente:", deviceResponse);
         navigate("/");
       } catch (error) {

@@ -7,11 +7,12 @@ const COLORS = ['#0088FE', '#FF8042'];
 
 export default function GenderPieChart() {
   const [data, setData] = useState([]);
+  const token = localStorage.getItem('jwt')
 
   useEffect(() => {
     const getData = async () => {
       try {
-        const users = await fetchUsers();
+        const users = await fetchUsers(token);
         const maleCount = users.filter(user => user.gender === 'H').length;
         const femaleCount = users.filter(user => user.gender === 'M').length;
 

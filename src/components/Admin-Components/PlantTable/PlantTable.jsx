@@ -9,9 +9,10 @@ import { CiEdit } from "react-icons/ci";
 
 export default function PlantTable() {
   const [plants, setPlants] = useState([]);
+  const token = localStorage.getItem('jwt')
 
   const handleDelete = async (id) => {
-    const peticion = await fetchDeletePlantById(id);
+    const peticion = await fetchDeletePlantById(id, token);
     if (peticion) {
       console.log(peticion);
       alert(`Planta ${id} eliminado`);
@@ -26,7 +27,7 @@ export default function PlantTable() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetchPlants();
+        const response = await fetchPlants(token);
         setPlants(response); // Asumiendo que response es un array de plantas
       } catch (error) {
         console.error("Error fetching plants:", error);

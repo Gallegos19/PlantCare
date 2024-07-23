@@ -4,11 +4,12 @@ import { fetchUsers } from '../../../utils/RequestPlant/requestPlant';
 import style from "./userGrowthChart.module.css"
 export default function UserGrowthChart() {
   const [data, setData] = useState([]);
+  const token = localStorage.getItem('jwt')
 
   useEffect(() => {
     const getData = async () => {
       try {
-        const users = await fetchUsers();
+        const users = await fetchUsers(token);
         // Assuming users have a "created_at" field and we're counting new users per month
         const monthlyCounts = users.reduce((acc, user) => {
           const date = new Date(user.created_at);

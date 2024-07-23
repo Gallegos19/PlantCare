@@ -6,9 +6,10 @@ import { CiEdit } from "react-icons/ci";
 
 export default function DeviceTable() {
   const [devices, setDevices] = useState([]);
+  const token = localStorage.getItem('jwt')
 
   const handleDelete = async (mac) => {
-    const peticion = await fetchDeleteDeviceByMac(mac)
+    const peticion = await fetchDeleteDeviceByMac(mac, token)
     if(peticion){
       console.log(peticion);
       alert(`Dispositivo ${mac} eliminado`);
@@ -23,7 +24,7 @@ export default function DeviceTable() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetchDevice();
+        const response = await fetchDevice(token);
         setDevices(response); // Asumiendo que response es un array de dispositivos
       } catch (error) {
         console.error('Error fetching devices:', error);

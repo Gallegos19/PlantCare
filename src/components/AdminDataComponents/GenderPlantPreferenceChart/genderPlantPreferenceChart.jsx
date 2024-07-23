@@ -9,11 +9,12 @@ const COLORS = [
 
 export default function GenderPlantPreferenceChart() {
   const [data, setData] = useState([]);
+  const token = localStorage.getItem('jwt')
 
   useEffect(() => {
     const getData = async () => {
       try {
-        const users = await fetchUsers();
+        const users = await fetchUsers(token);
         // Assuming users have fields "gender" and "name_plant"
         const genderPlantPreferences = users.reduce((acc, user) => {
           user.name_plant.forEach(plant => {

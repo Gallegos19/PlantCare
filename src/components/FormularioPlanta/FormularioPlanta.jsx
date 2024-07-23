@@ -25,6 +25,7 @@ const FormularioPlanta = forwardRef((props, ref) => {
   const [types, setTypes] = useState([]);
   const [families, setFamilies] = useState([]);
   const [imageUrl, setImageUrl] = useState("");
+  const token = localStorage.getItem('jwt')
   const navigate = useNavigate();
 
   useImperativeHandle(ref, () => ({
@@ -39,13 +40,13 @@ const FormularioPlanta = forwardRef((props, ref) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const fetchedCategories = await fetchCategories();
+        const fetchedCategories = await fetchCategories(token);
         setCategories(fetchedCategories.map(item => item.name));
         
-        const fetchedTypes = await fetchTypes();
+        const fetchedTypes = await fetchTypes(token);
         setTypes(fetchedTypes.map(item => item.name));
 
-        const fetchedFamilies = await fetchFamilies();
+        const fetchedFamilies = await fetchFamilies(token);
         setFamilies(fetchedFamilies.map(item => item.name));
       } catch (error) {
         console.error("Error fetching data:", error);
