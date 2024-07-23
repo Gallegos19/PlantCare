@@ -32,8 +32,18 @@ const FormularioLogin = forwardRef((props, ref) => {
           // Guardar el correo en localStorage
           console.log(response);
           localStorage.setItem('userEmail', username);
-          localStorage.setItem("jwt", response.data.access_token)
-          navigate('/');
+          localStorage.setItem('jwt', response.data.access_token);
+          const role = response.data.roles; // Asume que el rol se devuelve en la respuesta
+          console.log(role);
+
+          if (String(role) === 'user') {
+            navigate('/');
+          } else if (String(role) === 'admin') {
+            navigate('/admin');
+          } else {
+            setAlertMessage('Rol desconocido.');
+            setAlertOpen(true);
+          }
         } else {
           setAlertMessage('Credenciales incorrectas.');
           setAlertOpen(true);
@@ -47,7 +57,6 @@ const FormularioLogin = forwardRef((props, ref) => {
       setAlertOpen(true);
     }
   };
-  
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -62,16 +71,16 @@ const FormularioLogin = forwardRef((props, ref) => {
         texto="Correo"
         type="email"
         value={username}
-        onChange={(newValue) => setUsername(newValue)}
+        onChange={(e) => setUsername(e)}
       />
       <Input
         texto="Contraseña"
-        type='password'
+        type="password"
         value={contrasena}
-        onChange={(newValue) => setContrasena(newValue)}
+        onChange={(e) => setContrasena(e)}
       />
       <div onClick={handleEntrar}>
-        <Button title='Entrar'/>
+        <Button title="Entrar" />
       </div>
       {/* <div onClick={() => navigate('/register')}>
         <p className={Style.text}>
