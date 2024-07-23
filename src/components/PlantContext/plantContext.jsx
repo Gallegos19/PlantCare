@@ -1,19 +1,22 @@
-
 import React, { createContext, useState, useEffect } from "react";
-import { fetchDeviceByemail } from "../../utils/RequestPlant/requestPlant";
+import { fetchDeviceByemail, fetchDeviceByMac } from "../../utils/RequestPlant/requestPlant";
 
 const PlantContext = createContext();
 
 export function PlantProvider({ children }) {
   const [plants, setPlants] = useState([]);
+  const [macs, setMacs] = useState([]);
+  const [selectedPlantRecords, setSelectedPlantRecords] = useState([]);
 
   useEffect(() => {
     const loadPlants = async () => {
       try {
-        const plantData = await fetchDeviceByemail();
-        console.log("Plants loaded in context:", plantData); 
-        setPlants(plantData);
-        localStorage.setItem('plants', JSON.stringify(plantData)); 
+        const { plants, macs } = await fetchDeviceByemail();
+        console.log("Plants and MACs loaded in context:", { plants, macs });
+        setPlants(plants);
+        setMacs(macs);
+        localStorage.setItem('plants', JSON.stringify(plants));
+        localStorage.setItem('macs', JSON.stringify(macs));
       } catch (error) {
         console.error("Error loading plants:", error);
       }
@@ -30,8 +33,24 @@ export function PlantProvider({ children }) {
     });
   };
 
+  const loadPlantRecordsByMac = async (mac) => {
+    try {
+      const plantData = await fetchDeviceByMac(mac);
+      if (plantData && plantData.plant_records) {
+        setSelectedPlantRecords(plantData.plant_records);
+        localStorage.setItem('plantRecords', JSON.stringify(plantData.plant_records));
+        console.log("estio es "+plantData.plant_records)
+      } else {
+        console.error("No plant records found");
+      }
+    } catch (error) {
+      console.error("Error loading plant records:", error);
+    }
+  };
+  
+
   return (
-    <PlantContext.Provider value={{ plants, addPlant }}>
+    <PlantContext.Provider value={{ plants, macs, addPlant, selectedPlantRecords, loadPlantRecordsByMac }}>
       {children}
     </PlantContext.Provider>
   );

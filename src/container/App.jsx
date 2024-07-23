@@ -19,6 +19,7 @@ import AddUser from '../pages/AddUser/AddUser';
 
 import DataClient from '../pages/StadisticalDataClient/dataClient';
 import Data from '../components/stadisticalData/stadisticalData';
+import PlantRecordsContext from '../context/Context';
 
 import { PlantProvider } from '../components/PlantContext/plantContext';
 
@@ -42,7 +43,6 @@ function App() {
           <Route path='/add-user' element={<AddUser /> } />
           {isAuthenticated ? (
             <>
-
               <Route path='/' element={<Home />} />
               <Route path='/specific/:plantName' element={<SpecificPlant />} />
               <Route path='/graph' element={<Graph />} />

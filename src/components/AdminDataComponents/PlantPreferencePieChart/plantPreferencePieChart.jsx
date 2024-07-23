@@ -1,16 +1,35 @@
-import React from 'react';
+import {React,useState,useEffect } from 'react';
 import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
 import style from "./plantPreferencePieChart.module.css"
-const data = [
-  { name: 'Rosas', value: 240 },
-  { name: 'Tulipanes', value: 130 },
-  { name: 'Orquídeas', value: 100 },
-  { name: 'Girasoles', value: 80 }
-];
-
+import { fetchPlants } from '../../../utils/RequestPlant/requestPlant';
 const COLORS = ['#FFBB28', '#FF8042', '#0088FE', '#00C49F'];
 
 export default function PlantPreferencePieChart() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const plants = await fetchPlants();
+        const plantCounts = plants.reduce((acc, plant) => {
+          acc[plant.name] = (acc[plant.name] || 0) + 1;
+          return acc;
+        }, {});
+
+        const chartData = Object.keys(plantCounts).map(key => ({
+          name: key,
+          value: plantCounts[key]
+        }));
+
+        setData(chartData);
+      } catch (error) {
+        console.error("Error fetching plant data:", error);
+      }
+    };
+
+    getData();
+  }, []);
+
   return (
     <div className={style.chartContainer}>
       <h2>Preferencia de Plantas</h2>

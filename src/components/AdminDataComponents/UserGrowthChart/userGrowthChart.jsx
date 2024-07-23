@@ -1,16 +1,36 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { fetchUsers } from '../../../utils/RequestPlant/requestPlant';
 import style from "./userGrowthChart.module.css"
-const data = [
-  { name: 'Ene', usuarios: 30 },
-  { name: 'Feb', usuarios: 45 },
-  { name: 'Mar', usuarios: 50 },
-  { name: 'Abr', usuarios: 75 },
-  { name: 'May', usuarios: 100 },
-  { name: 'Jun', usuarios: 120 }
-];
-
 export default function UserGrowthChart() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const users = await fetchUsers();
+        // Assuming users have a "created_at" field and we're counting new users per month
+        const monthlyCounts = users.reduce((acc, user) => {
+          const date = new Date(user.created_at);
+          const month = date.toLocaleString('default', { month: 'short' });
+          acc[month] = (acc[month] || 0) + 1;
+          return acc;
+        }, {});
+
+        const chartData = Object.keys(monthlyCounts).map(month => ({
+          name: month,
+          usuarios: monthlyCounts[month]
+        }));
+
+        setData(chartData);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    getData();
+  }, []);
+
   return (
     <div className={style.chartContainer}>
       <h2>Crecimiento de Usuarios</h2>
