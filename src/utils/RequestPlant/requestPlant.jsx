@@ -1,95 +1,104 @@
-
 export const fetchPlants = async (token) => {
-    try {
-        const response = await fetch("https://PlantCareBack.integrador.xyz/api/plant", {
-          method:"GET",
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        });
-        if (!response.ok) {
-            throw new Error("Network response was not ok " + response.statusText);
-        }
-        const data = await response.json();
-        console.log(data.data)
-        return data.data;
-     
-    } catch (error) {
-        console.error("There was a problem with the fetch operation:", error);
-        throw error;
+  try {
+    const response = await fetch(
+      "https://PlantCareBack.integrador.xyz/api/plant",
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok " + response.statusText);
     }
+    const data = await response.json();
+    console.log(data.data);
+    return data.data;
+  } catch (error) {
+    console.error("There was a problem with the fetch operation:", error);
+    throw error;
+  }
 };
 
 export const fetchCategories = async (token) => {
-    try {
-        const response = await fetch("https://PlantCareBack.integrador.xyz/api/category",{
-          method:"GET",
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        });
-        if (!response.ok) {
-            throw new Error("Network response was not ok " + response.statusText);
-        }
-        const data = await response.json();
-        return data.data;
-    } catch (error) {
-        console.error("There was a problem with the fetch operation:", error);
-        throw error;
-    }
-}
-
-export const fetchTypes = async (token) => {
-    try {
-        const response = await fetch("https://PlantCareBack.integrador.xyz/api/typePlant",{
-          method:"GET",
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        });
-        if (!response.ok) {
-            throw new Error("Network response was not ok " + response.statusText);
-        }
-        const data = await response.json();
-        return data.data;
-    } catch (error) {
-        console.error("There was a problem with the fetch operation:", error);
-        throw error;
-    }
-}
-
-export const fetchFamilies = async (token) => {
-    try {
-        const response = await fetch("https://PlantCareBack.integrador.xyz/api/family",{
-              method:"GET",
+  try {
+    const response = await fetch(
+      "https://PlantCareBack.integrador.xyz/api/category",
+      {
+        method: "GET",
         headers: {
-          'Authorization': `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
-        });
-        if (!response.ok) {
-            throw new Error("Network response was not ok " + response.statusText);
-        }
-        const data = await response.json();
-        return data.data;
-    } catch (error) {
-        console.error("There was a problem with the fetch operation:", error);
-        throw error;
+      }
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok " + response.statusText);
     }
-}
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.error("There was a problem with the fetch operation:", error);
+    throw error;
+  }
+};
 
-  
+export const fetchTypes = async (token) => {
+  try {
+    const response = await fetch(
+      "https://PlantCareBack.integrador.xyz/api/typePlant",
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok " + response.statusText);
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.error("There was a problem with the fetch operation:", error);
+    throw error;
+  }
+};
 
+export const fetchFamilies = async (token) => {
+  try {
+    const response = await fetch(
+      "https://PlantCareBack.integrador.xyz/api/family",
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok " + response.statusText);
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.error("There was a problem with the fetch operation:", error);
+    throw error;
+  }
+};
 
 export const createPlant = async (plantData, token) => {
-    try {
-      const response = await fetch("https://PlantCareBack.integrador.xyz/api/plant", {
+  try {
+    const response = await fetch(
+      "https://PlantCareBack.integrador.xyz/api/plant",
+      {
         method: "POST",
         headers: {
-          'Authorization': `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
@@ -103,135 +112,174 @@ export const createPlant = async (plantData, token) => {
           categories: plantData.categories,
           types: plantData.types,
           families: plantData.families,
-          url_image_plant: plantData.url_image_plant
+          url_image_plant: plantData.url_image_plant,
         }),
-      });
-  
-      if (!response.ok) {
-        throw new Error("Network response was not ok " + response.statusText);
       }
-  
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error("There was a problem with the fetch operation:", error);
-      throw error;
+    );
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok " + response.statusText);
     }
-  };
 
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("There was a problem with the fetch operation:", error);
+    throw error;
+  }
+};
 
-  export const createDevice = async (deviceData, token) => {
-    try {
-      const response = await fetch("https://PlantCareBack.integrador.xyz/api/device", {
+export const createDevice = async (deviceData, token) => {
+  try {
+    const response = await fetch(
+      "https://PlantCareBack.integrador.xyz/api/device",
+      {
         method: "POST",
         headers: {
-          'Authorization': `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          correo: deviceData.user.email, 
+          correo: deviceData.user.email,
           name_plant: deviceData.name,
-          mac: deviceData.mac
+          mac: deviceData.mac,
         }),
-      });
-  
-      const data = await response.json();
-  
-      if (!response.ok || !data.success) {
-        throw new Error(data.message || "Error desconocido");
       }
-  
-      return data;
-    } catch (error) {
-      console.error("Hubo un problema con la operación fetch:", error);
-      throw error;
-    }
-  };
+    );
 
-  export const createUser = async (userData, token) => {
-    try {
-      const response = await fetch("https://PlantCareBack.integrador.xyz/api/users", {
+    const data = await response.json();
+
+    if (!response.ok || !data.success) {
+      throw new Error(data.message || "Error desconocido");
+    }
+
+    return data;
+  } catch (error) {
+    console.error("Hubo un problema con la operación fetch:", error);
+    throw error;
+  }
+};
+
+export const createUser = async (userData, token) => {
+  try {
+    const response = await fetch(
+      "https://PlantCareBack.integrador.xyz/api/users",
+      {
         method: "POST",
         headers: {
-          'Authorization': `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email: userData.email, 
+          email: userData.email,
           name: userData.name,
           last_name: userData.last_name,
           password: userData.password,
           rol: userData.rol,
-          gender: userData.gender
+          gender: userData.gender,
         }),
-      });
-  
-      const data = await response.json();
-  
-      if (!response.ok || !data.success) {
-        throw new Error(data.message || "Error desconocido");
       }
-  
-      return data;
-    } catch (error) {
-      console.error("Hubo un problema con la operación fetch:", error);
-      throw error;
+    );
+
+    const data = await response.json();
+
+    if (!response.ok || !data.success) {
+      throw new Error(data.message || "Error desconocido");
     }
-  };
-  
+
+    return data;
+  } catch (error) {
+    console.error("Hubo un problema con la operación fetch:", error);
+    throw error;
+  }
+};
+
 export const fetchDevice = async (token) => {
-    try {
-        const response = await fetch("https://PlantCareBack.integrador.xyz/api/device",{
-          method: 'GET',
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          }
-        });
-        if (!response.ok) {
-            throw new Error("Network response was not ok " + response.statusText);
-        }
-        const data = await response.json();
-        console.log(data.data)
-        return data.data;
-     
-    } catch (error) {
-        console.error("There was a problem with the fetch operation:", error);
-        throw error;
+  try {
+    const response = await fetch(
+      "https://PlantCareBack.integrador.xyz/api/device",
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok " + response.statusText);
     }
+    const data = await response.json();
+    console.log(data.data);
+    return data.data;
+  } catch (error) {
+    console.error("There was a problem with the fetch operation:", error);
+    throw error;
+  }
 };
 
 export const fetchUsers = async (token) => {
   try {
-      const response = await fetch("https://PlantCareBack.integrador.xyz/api/users",{
-        method: 'GET',
+    const response = await fetch(
+      "https://PlantCareBack.integrador.xyz/api/users",
+      {
+        method: "GET",
         headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        }
-      });
-      
-      if (!response.ok) {
-          throw new Error("Network response was not ok " + response.statusText);
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
       }
-      const data = await response.json();
-      console.log(data.data);
-      return data.data; // Asegúrate de que 'data.data' es un array de usuarios
+    );
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok " + response.statusText);
+    }
+    const data = await response.json();
+    console.log(data.data);
+    return data.data; // Asegúrate de que 'data.data' es un array de usuarios
   } catch (error) {
-      console.error("There was a problem with the fetch operation:", error);
-      throw error;
+    console.error("There was a problem with the fetch operation:", error);
+    throw error;
+  }
+};
+
+export const fetchUserbyEmail = async (name,token) => {
+  try {
+    const response = await fetch(
+      `https://plantcareback.integrador.xyz/api/users/by-email/${name}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization : `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok " + response.statusText);
+    }
+    const data = await response.json();
+    console.log(data.data);
+    return data.data;
+  } catch (error) {
+    console.error("There was a problem with the fetch operation:", error);
+    throw error;
   }
 };
 
 export const fetchHealth = async (token) => {
   try {
-    const response = await fetch("https://PlantCareBack.integrador.xyz/api/health", {
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json'
+    const response = await fetch(
+      "https://PlantCareBack.integrador.xyz/api/health",
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
       }
-    });
+    );
     if (!response.ok) {
       throw new Error(response.status);
     }
@@ -244,54 +292,62 @@ export const fetchHealth = async (token) => {
   }
 };
 
-
-
-
-
 export const fetchDeviceByemail = async (token) => {
   try {
-      const email = localStorage.getItem('userEmail');
-      const response = await fetch(`https://PlantCareBack.integrador.xyz/api/device/email?email=${email}`,{
-        method: 'GET',
+    const email = localStorage.getItem("userEmail");
+    const response = await fetch(
+      `https://PlantCareBack.integrador.xyz/api/device/email?email=${email}`,
+      {
+        method: "GET",
         headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        }
-      });
-      
-      if (!response.ok) {
-          throw new Error("Network response was not ok " + response.statusText);
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
       }
-      
-      const data = await response.json();
-      console.log("Fetched data:", data); // Verifica los datos
-      
-      // Extrae las plantas y la MAC de cada dispositivo
-      const plants = data.data.map(device => ({
-          ...device.plant,
-          mac: device.mac  // Incluye la MAC en cada planta
-      })).filter(plant => plant);
-      
-      console.log("Plants extracted:", plants); // Verifica las plantas extraídas
-      
-      return { plants, macs: data.data.map(device => ({ plantId: device.plant.id, mac: device.mac })) };
+    );
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok " + response.statusText);
+    }
+
+    const data = await response.json();
+    console.log("Fetched data:", data); // Verifica los datos
+
+    // Extrae las plantas y la MAC de cada dispositivo
+    const plants = data.data
+      .map((device) => ({
+        ...device.plant,
+        mac: device.mac, // Incluye la MAC en cada planta
+      }))
+      .filter((plant) => plant);
+
+    console.log("Plants extracted:", plants); // Verifica las plantas extraídas
+
+    return {
+      plants,
+      macs: data.data.map((device) => ({
+        plantId: device.plant.id,
+        mac: device.mac,
+      })),
+    };
   } catch (error) {
-      console.error("There was a problem with the fetch operation:", error);
-      throw error;
+    console.error("There was a problem with the fetch operation:", error);
+    throw error;
   }
 };
 
-
-
 export const fetchDeviceByMac = async (mac, token) => {
   try {
-    const response = await fetch(`https://PlantCareBack.integrador.xyz/api/device/mac?macAddress=${mac}`,{
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json'
+    const response = await fetch(
+      `https://PlantCareBack.integrador.xyz/api/device/mac?macAddress=${mac}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
       }
-    });
+    );
     if (!response.ok) {
       throw new Error("Network response was not ok " + response.statusText);
     }
@@ -304,19 +360,19 @@ export const fetchDeviceByMac = async (mac, token) => {
   }
 };
 
-
-
-
 export const fetchDeleteDeviceByMac = async (mac, token) => {
   try {
     // Cambia el método a DELETE
-    const response = await fetch(`https://PlantCareBack.integrador.xyz/api/device/mac?macAddress=${mac}`, {
-      method: 'DELETE',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json'
+    const response = await fetch(
+      `https://PlantCareBack.integrador.xyz/api/device/mac?macAddress=${mac}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
       }
-    });
+    );
 
     // Verifica si la respuesta es correcta
     if (!response.ok) {
@@ -334,18 +390,20 @@ export const fetchDeleteDeviceByMac = async (mac, token) => {
     throw error;
   }
 };
-
 
 export const fetchDeletePlantById = async (id, token) => {
   try {
     // Cambia el método a DELETE
-    const response = await fetch(`https://PlantCareBack.integrador.xyz/api/plant/${id}`, {
-      method: 'DELETE',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json'
+    const response = await fetch(
+      `https://PlantCareBack.integrador.xyz/api/plant/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
       }
-    });
+    );
 
     // Verifica si la respuesta es correcta
     if (!response.ok) {
@@ -364,30 +422,30 @@ export const fetchDeletePlantById = async (id, token) => {
   }
 };
 
-
-
 export const fetchLogin = async (UserData) => {
-    try {
-      const response = await fetch("https://PlantCareBack.integrador.xyz/api/auth/authenticate", {
+  try {
+    const response = await fetch(
+      "https://PlantCareBack.integrador.xyz/api/auth/authenticate",
+      {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
           email: UserData.email,
-          password: UserData.password
+          password: UserData.password,
         }),
-      });
-  
-      if (!response.ok) {
-        throw new Error("Network response was not ok " + response.statusText);
       }
-  
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error("There was a problem with the fetch operation:", error);
-      throw error;
+    );
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok " + response.statusText);
     }
-  };
-  
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("There was a problem with the fetch operation:", error);
+    throw error;
+  }
+};

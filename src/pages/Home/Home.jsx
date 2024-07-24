@@ -16,13 +16,13 @@ export default function Home() {
       <div>
         <div className={style.header}>
           <h1 className={style.Jardin}>Mi Jardín</h1>
-          <div className={style.selectContainer}>
+          {/* <div className={style.selectContainer}>
             <select>
               <option value="nombre">Nombre</option>
               <option value="tipo">Tipo</option>
               <option value="fecha">Fecha</option>
             </select>
-          </div>
+          </div> */}
         </div>
         <CardList plants={plants} />
       </div>
