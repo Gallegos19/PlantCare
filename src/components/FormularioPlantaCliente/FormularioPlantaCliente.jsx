@@ -247,14 +247,14 @@ const FormularioPlantaCliente = forwardRef((props, ref) => {
             readOnly
           />
           <Input
-            texto="Temperatura de la tierra"
+            texto="Temperatura tierra"
             type="number"
             value={temperaturaTierra}
             onChange={handleChange(setTemperaturaTierra)}
             readOnly
           />
           <Input
-            texto="Humedad de la tierra"
+            texto="Humedad tierra"
             type="number"
             value={humedadTierra}
             onChange={handleChange(setHumedadTierra)}
@@ -268,7 +268,7 @@ const FormularioPlantaCliente = forwardRef((props, ref) => {
             readOnly
           />
           <Input
-            texto="Temperatura ambiente"
+            texto="Temp ambiente"
             type="number"
             value={temperatura}
             onChange={handleChange(setTemperatura)}
@@ -284,10 +284,13 @@ const FormularioPlantaCliente = forwardRef((props, ref) => {
           />
         </div>
       </div>
+      <div className={Style.img}>
       <ImageUploaderClient imageUrl={imageUrl} bandera="true" setImageUrl={setImageUrl} />
       <div onClick={handleEntrar}>
         <Button title="Guardar" />
       </div>
+      </div>
+      
       <Snackbar open={alertOpen} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
           {alertMessage}

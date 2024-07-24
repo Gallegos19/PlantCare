@@ -1,7 +1,7 @@
 
 export const fetchPlants = async (token) => {
     try {
-        const response = await fetch("http://44.197.7.97:8081/api/plant", {
+        const response = await fetch("https://PlantCareBack.integrador.xyz/api/plant", {
           method:"GET",
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -23,7 +23,7 @@ export const fetchPlants = async (token) => {
 
 export const fetchCategories = async (token) => {
     try {
-        const response = await fetch("http://44.197.7.97:8081/api/category",{
+        const response = await fetch("https://PlantCareBack.integrador.xyz/api/category",{
           method:"GET",
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -43,7 +43,7 @@ export const fetchCategories = async (token) => {
 
 export const fetchTypes = async (token) => {
     try {
-        const response = await fetch("http://44.197.7.97:8081/api/typePlant",{
+        const response = await fetch("https://PlantCareBack.integrador.xyz/api/typePlant",{
           method:"GET",
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -63,7 +63,7 @@ export const fetchTypes = async (token) => {
 
 export const fetchFamilies = async (token) => {
     try {
-        const response = await fetch("http://44.197.7.97:8081/api/family",{
+        const response = await fetch("https://PlantCareBack.integrador.xyz/api/family",{
               method:"GET",
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -86,7 +86,7 @@ export const fetchFamilies = async (token) => {
 
 export const createPlant = async (plantData, token) => {
     try {
-      const response = await fetch("http://44.197.7.97:8081/api/plant", {
+      const response = await fetch("https://PlantCareBack.integrador.xyz/api/plant", {
         method: "POST",
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -122,7 +122,7 @@ export const createPlant = async (plantData, token) => {
 
   export const createDevice = async (deviceData, token) => {
     try {
-      const response = await fetch("http://44.197.7.97:8081/api/device", {
+      const response = await fetch("https://PlantCareBack.integrador.xyz/api/device", {
         method: "POST",
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -150,7 +150,7 @@ export const createPlant = async (plantData, token) => {
 
   export const createUser = async (userData, token) => {
     try {
-      const response = await fetch("http://44.197.7.97:8081/api/users", {
+      const response = await fetch("https://PlantCareBack.integrador.xyz/api/users", {
         method: "POST",
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -181,7 +181,7 @@ export const createPlant = async (plantData, token) => {
   
 export const fetchDevice = async (token) => {
     try {
-        const response = await fetch("http://44.197.7.97:8081/api/device",{
+        const response = await fetch("https://PlantCareBack.integrador.xyz/api/device",{
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -203,7 +203,7 @@ export const fetchDevice = async (token) => {
 
 export const fetchUsers = async (token) => {
   try {
-      const response = await fetch("http://44.197.7.97:8081/api/users",{
+      const response = await fetch("https://PlantCareBack.integrador.xyz/api/users",{
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -225,7 +225,7 @@ export const fetchUsers = async (token) => {
 
 export const fetchHealth = async (token) => {
   try {
-    const response = await fetch("http://44.197.7.97:8081/api/health", {
+    const response = await fetch("https://PlantCareBack.integrador.xyz/api/health", {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -251,7 +251,7 @@ export const fetchHealth = async (token) => {
 export const fetchDeviceByemail = async (token) => {
   try {
       const email = localStorage.getItem('userEmail');
-      const response = await fetch(`http://44.197.7.97:8081/api/device/email?email=${email}`,{
+      const response = await fetch(`https://PlantCareBack.integrador.xyz/api/device/email?email=${email}`,{
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -285,7 +285,7 @@ export const fetchDeviceByemail = async (token) => {
 
 export const fetchDeviceByMac = async (mac, token) => {
   try {
-    const response = await fetch(`http://44.197.7.97:8081/api/device/mac?macAddress=${mac}`,{
+    const response = await fetch(`https://PlantCareBack.integrador.xyz/api/device/mac?macAddress=${mac}`,{
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -310,7 +310,7 @@ export const fetchDeviceByMac = async (mac, token) => {
 export const fetchDeleteDeviceByMac = async (mac, token) => {
   try {
     // Cambia el método a DELETE
-    const response = await fetch(`http://44.197.7.97:8081/api/device/mac?macAddress=${mac}`, {
+    const response = await fetch(`https://PlantCareBack.integrador.xyz/api/device/mac?macAddress=${mac}`, {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -339,7 +339,7 @@ export const fetchDeleteDeviceByMac = async (mac, token) => {
 export const fetchDeletePlantById = async (id, token) => {
   try {
     // Cambia el método a DELETE
-    const response = await fetch(`http://44.197.7.97:8081/api/plant/${id}`, {
+    const response = await fetch(`https://PlantCareBack.integrador.xyz/api/plant/${id}`, {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -368,7 +368,7 @@ export const fetchDeletePlantById = async (id, token) => {
 
 export const fetchLogin = async (UserData) => {
     try {
-      const response = await fetch("http://44.197.7.97:8081/api/auth/authenticate", {
+      const response = await fetch("https://PlantCareBack.integrador.xyz/api/auth/authenticate", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
