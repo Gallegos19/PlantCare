@@ -1,6 +1,6 @@
 .containerForm{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     width: 50%;
     align-items: center;
     gap: 0.5em;
@@ -40,11 +40,18 @@
     }
     .containerForm{
         width: 100%;
+        flex-direction: column;
     }
     .containerInputs{
+        width: 100%;
         flex-direction: column;
     }
     .groups{
+        width: 100%;
+    }
+    .img{
+        display: flex;
+        flex-direction: column;
         width: 100%;
     }
 }

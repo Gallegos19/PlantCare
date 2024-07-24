@@ -108,7 +108,7 @@ export default function Graphics({ plantMac }) {
             </RadarChart>
           </ResponsiveContainer>
         </div>
-        <div onClick={() => handleGraphClick("scatter")}>
+        {/* <div onClick={() => handleGraphClick("scatter")}>
           <h3>Scatter Chart</h3>
           <ResponsiveContainer width="100%" height={300}>
             <ScatterChart>
@@ -119,7 +119,7 @@ export default function Graphics({ plantMac }) {
               <Scatter name="Humidity vs Temperature" data={scatterRecords} fill="#8884d8" />
             </ScatterChart>
           </ResponsiveContainer>
-        </div>
+        </div> */}
       </div>
     );
   }

@@ -3,7 +3,7 @@ import style from './userTable.module.css';
 
 export const fetchUsers = async (token) => {
   try {
-      const response = await fetch("http://44.197.7.97:8081/api/users",{
+      const response = await fetch("https://PlantCareBack.integrador.xyz/api/users",{
         method:"GET",
         headers: {
           'Authorization': `Bearer ${token}`,
