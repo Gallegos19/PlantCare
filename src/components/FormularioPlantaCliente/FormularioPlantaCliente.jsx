@@ -9,6 +9,7 @@ import { fetchPlants } from '../../utils/RequestPlant/requestPlant';
 import PlantContext from "../PlantContext/plantContext";
 import ImageUploaderClient from "../ImageUploader/ImageUploaderClient";
 import { createDevice } from "../../utils/RequestPlant/requestPlant";
+import MacAddressValidator from "../Input/MacInput";
 
 const FormularioPlantaCliente = forwardRef((props, ref) => {
   const [nombreCientifico, setNombreCientifico] = useState("");
@@ -54,7 +55,7 @@ const FormularioPlantaCliente = forwardRef((props, ref) => {
           categories: plant.categories,
           types: plant.types,
           families: plant.families,
-          imageUrl: plant.url_image_plant 
+          imageUrl: plant.url_image_plant
         })));
       } catch (error) {
         console.error("Error fetching plants:", error);
@@ -120,9 +121,9 @@ const FormularioPlantaCliente = forwardRef((props, ref) => {
       { name: 'luz', value: luz.toString() },
       { name: 'temperatura', value: temperatura.toString() },
       { name: 'gas', value: gas.toString() },
-      { name: 'mac', value: mac } 
+      { name: 'mac', value: mac }
     ].every(({ value }) => typeof value === 'string' && value.trim() !== '');
-  
+
     if (!allFieldsValid) {
       console.log("Validación fallida:");
       console.log("nombre:", nombre, "Tipo:", typeof nombre);
@@ -137,12 +138,12 @@ const FormularioPlantaCliente = forwardRef((props, ref) => {
       console.log("gas:", gas, "Tipo:", typeof gas);
       console.log("mac:", mac, "Tipo:", typeof mac);
     }
-    
+
     return allFieldsValid;
   };
 
   const handleEntrar = async () => {
-    
+
     const userEmail = localStorage.getItem('userEmail');
     console.log("Datos de entrada:", {
       nombre,
@@ -276,21 +277,19 @@ const FormularioPlantaCliente = forwardRef((props, ref) => {
           />
         </div>
         <div className={Style.groups}>
-          <Input
-            texto="MAC"
-            type="text"
+          <MacAddressValidator
             value={mac}
             onChange={handleChange(setMac)}
           />
         </div>
       </div>
       <div className={Style.img}>
-      <ImageUploaderClient imageUrl={imageUrl} bandera="true" setImageUrl={setImageUrl} />
-      <div onClick={handleEntrar}>
-        <Button title="Guardar" />
+        <ImageUploaderClient imageUrl={imageUrl} bandera="true" setImageUrl={setImageUrl} />
+        <div onClick={handleEntrar}>
+          <Button title="Guardar" />
+        </div>
       </div>
-      </div>
-      
+
       <Snackbar open={alertOpen} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
           {alertMessage}

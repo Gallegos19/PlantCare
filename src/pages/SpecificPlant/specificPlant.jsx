@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { io } from "socket.io-client";
+import {io} from "socket.io-client"
 import Nav from "../../components/nav/nav";
 import Footer from "../../components/footer/footer";
 import style from "./specificPlant.module.css";
