@@ -6,33 +6,29 @@ import GenderPieChart from "../../components/AdminDataComponents/GenderPieChart/
 import UserGrowthChart from "../../components/AdminDataComponents/UserGrowthChart/userGrowthChart";
 import PlantPreferencePieChart from "../../components/AdminDataComponents/PlantPreferencePieChart/plantPreferencePieChart";
 import GenderPlantPreferenceChart from "../../components/AdminDataComponents/GenderPlantPreferenceChart/genderPlantPreferenceChart";
-export default function AdminData(){
-    return(
+export default function AdminData() {
+    return (
         <div>
             <nav>
-                <NavAdmin/>
+                <NavAdmin />
             </nav>
 
             <main className={style.mainContent}>
-            <h1 style={{fontFamily:'Poppins'}}>Datos de Usuarios</h1>
-            <div className={style.chartContainer}>
-                <div className={style.section}>
-                    <GenderPieChart />
-                    <UserGrowthChart />
+                <h1 style={{ fontFamily: 'Poppins' }}>Datos de Usuarios</h1>
+                <div className={style.chartContainer}>
+                    <div className={style.section}>
+                        <GenderPieChart />
+                        <UserGrowthChart />
+                    </div>
+                    <div className={style.section}>
+                        <PlantPreferencePieChart />
+                        <GenderPlantPreferenceChart />
+                    </div>
                 </div>
-                <div className={style.section}>
-                    <PlantPreferencePieChart />
-                    <GenderPlantPreferenceChart />
-                </div>
-               
-                
-            </div>
-               
-
             </main>
 
             <footer>
-                <Footer/>
+                <Footer />
             </footer>
         </div>
     )

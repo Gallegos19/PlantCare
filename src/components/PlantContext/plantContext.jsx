@@ -13,7 +13,6 @@ export function PlantProvider({ children }) {
     const loadPlants = async () => {
       try {
         const { plants, macs } = await fetchDeviceByemail(token);
-        console.log("Plants and MACs loaded in context:", { plants, macs });
         setPlants(plants);
         setMacs(macs);
         localStorage.setItem('plants', JSON.stringify(plants));
@@ -40,7 +39,6 @@ export function PlantProvider({ children }) {
       if (plantData && plantData.plant_records) {
         setSelectedPlantRecords(plantData.plant_records);
         localStorage.setItem('plantRecords', JSON.stringify(plantData.plant_records));
-        console.log("estio es "+plantData.plant_records)
       } else {
         console.error("No plant records found");
       }

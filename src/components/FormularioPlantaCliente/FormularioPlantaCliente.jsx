@@ -42,7 +42,6 @@ const FormularioPlantaCliente = forwardRef((props, ref) => {
     const loadPlants = async () => {
       try {
         const data = await fetchPlants(token);
-        console.log("Plantas cargadas:", data);
         setPlants(data.map(plant => ({
           value: plant.name,
           label: plant.name,
@@ -75,7 +74,6 @@ const FormularioPlantaCliente = forwardRef((props, ref) => {
   }));
 
   const handleChange = (setter) => (newValue) => {
-    console.log("Nuevo valor:", newValue);
     setter(newValue || "");
   };
 
@@ -92,7 +90,7 @@ const FormularioPlantaCliente = forwardRef((props, ref) => {
       handleChange(setLuz)(selectedPlant.brightness || "");
       handleChange(setTemperatura)(selectedPlant.ambient_temperature || "");
       handleChange(setGas)(selectedPlant.mq135 || "");
-      setImageUrl(selectedPlant.imageUrl || ""); // Actualiza la URL de la imagen
+      setImageUrl(selectedPlant.imageUrl || ""); 
     } else {
       // Limpiar campos si no se encuentra la planta
       handleChange(setNombre)("");

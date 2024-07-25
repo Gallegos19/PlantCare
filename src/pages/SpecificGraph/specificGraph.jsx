@@ -33,8 +33,6 @@ export default function SpecificGraph() {
                     mq135: record.mq135,
                 }));
 
-                console.log("Formatted Records:", formattedRecords);
-
                 setData(formattedRecords);
                 setIsLoading(false);
             }

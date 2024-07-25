@@ -9,7 +9,6 @@ export default function CardListGraph({ plants }) {
     const { loadPlantRecordsByMac } = useContext(PlantContext); // Accede a la función para cargar datos por MAC
 
     const handleCardClick = async (plant) => {
-        console.log("Selected Plant:", plant);
         setSelectedPlant(plant);
         try {
             await loadPlantRecordsByMac(plant.mac); // Carga registros de la planta seleccionada usando su MAC

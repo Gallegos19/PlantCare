@@ -11,7 +11,6 @@ export default function DeviceTable() {
   const handleDelete = async (mac) => {
     const peticion = await fetchDeleteDeviceByMac(mac, token)
     if(peticion){
-      console.log(peticion);
       alert(`Dispositivo ${mac} eliminado`);
       window.location.reload();
     }

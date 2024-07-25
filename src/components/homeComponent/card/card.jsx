@@ -4,7 +4,6 @@ import style from "./card.module.css";
 import PlusBlack from "../../../assets/plusBlack.png";
 
 export default function Card({ name, imageUrl }) {
-    console.log("Card image URL:", imageUrl);  
     return (
         <div className={style.card}>
             <div className={style.cardHeader}>

@@ -24,9 +24,7 @@ export default function SpecificPlant() {
         const getPlant = () => {
             try {
                 const plantsData = JSON.parse(localStorage.getItem('plants')) || [];
-                console.log("Fetched plants data from localStorage:", plantsData);
                 const specificPlant = plantsData.find(p => p.name === plantName);
-                console.log("Specific plant found:", specificPlant);
                 setPlant(specificPlant);
             } catch (error) {
                 console.error("Error reading plant data from localStorage:", error);
@@ -43,14 +41,12 @@ export default function SpecificPlant() {
             setSocket(socketConexion);
 
             socketConexion.on('connect', () => {
-                console.log('Conectado a Socket.IO');
                 socketConexion.emit('join', 'boton'); // Unirse a la sala "plantRoom"
             });
 
 
             return () => {
                 socketConexion.disconnect();
-                console.log('Desconectado de Socket.IO');
             };
         }
     }, [device]);

@@ -14,7 +14,6 @@ export default function PlantTable() {
   const handleDelete = async (id) => {
     const peticion = await fetchDeletePlantById(id, token);
     if (peticion) {
-      console.log(peticion);
       alert(`Planta ${id} eliminado`);
       window.location.reload();
     } else {

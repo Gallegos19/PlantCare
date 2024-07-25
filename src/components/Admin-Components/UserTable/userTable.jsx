@@ -14,7 +14,6 @@ export const fetchUsers = async (token) => {
           throw new Error("Network response was not ok " + response.statusText);
       }
       const data = await response.json();
-      console.log(data.data);
       return data.data; // Asegúrate de que 'data.data' es un array de usuarios
   } catch (error) {
       console.error("There was a problem with the fetch operation:", error);
@@ -31,7 +30,6 @@ export default function UserTable() {
     const fetchData = async () => {
       try {
         const response = await fetchUsers(token); // Asegúrate de llamar a 'fetchUsers'
-        console.log("Fetched users:", response);
         setUsers(response); // Asumiendo que response es un array de usuarios
       } catch (error) {
         console.error("Error fetching users:", error);

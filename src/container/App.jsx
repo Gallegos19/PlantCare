@@ -25,30 +25,29 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const token = localStorage.getItem("jwt");
-    if (token) {
-      fetchHealth(token)
-        .then((data) => {
-          console.log(data);
+    const checkAuth = async () => {
+      const token = localStorage.getItem("jwt");
+      if (token) {
+        try {
+          const data = await fetchHealth(token);
           setIsAuthenticated(true);
-        })
-        .catch((error) => {
-          if (error.message === '403') {
-            console.error('Forbidden: Token is invalid or expired');
-          } else {
-            console.error('Error:', error);
-          }
-        })
-        .finally(() => {
+        } catch (error) {
+          console.error('Auth check error:', error);
+          localStorage.removeItem("jwt"); // Remove invalid token
+          setIsAuthenticated(false);
+        } finally {
           setLoading(false);
-        });
-    } else {
-      setLoading(false);
-    }
+        }
+      } else {
+        setLoading(false);
+      }
+    };
+    
+    checkAuth();
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>; // Puedes reemplazar esto con un componente de carga.
+    return <div>Loading...</div>; // Consider adding a more detailed loading indicator
   }
 
   return (
@@ -62,11 +61,11 @@ function App() {
               <Route path='/' element={<Home />} />
               <Route path='/specific/:plantName' element={<SpecificPlant />} />
               <Route path='/admin' element={<Admin />} />
-              <Route path='/add-user' element={<AddUser /> } />
+              <Route path='/add-user' element={<AddUser />} />
               <Route path='/graph' element={<Graph />} />
               <Route path='/adminData' element={<AdminData />} />
               <Route path='/addAdmin' element={<AddAdmin />} />
-              <Route path='/specificGraph/' element={<SpecificGraph />} />
+              <Route path='/specificGraph' element={<SpecificGraph />} />
               <Route path="/agregarplanta" element={<AgregarPlanta />} />
               <Route path="/agregarplantaadmin" element={<AgregarPlantaAdmin />} />
               <Route path="/addDevice" element={<AddDevice />} />

@@ -14,7 +14,6 @@ export const fetchPlants = async (token) => {
       throw new Error("Network response was not ok " + response.statusText);
     }
     const data = await response.json();
-    console.log(data.data);
     return data.data;
   } catch (error) {
     console.error("There was a problem with the fetch operation:", error);
@@ -210,7 +209,6 @@ export const fetchDevice = async (token) => {
       throw new Error("Network response was not ok " + response.statusText);
     }
     const data = await response.json();
-    console.log(data.data);
     return data.data;
   } catch (error) {
     console.error("There was a problem with the fetch operation:", error);
@@ -235,8 +233,7 @@ export const fetchUsers = async (token) => {
       throw new Error("Network response was not ok " + response.statusText);
     }
     const data = await response.json();
-    console.log(data.data);
-    return data.data; // Asegúrate de que 'data.data' es un array de usuarios
+    return data.data; 
   } catch (error) {
     console.error("There was a problem with the fetch operation:", error);
     throw error;
@@ -260,7 +257,6 @@ export const fetchUserbyEmail = async (name,token) => {
       throw new Error("Network response was not ok " + response.statusText);
     }
     const data = await response.json();
-    console.log(data.data);
     return data.data;
   } catch (error) {
     console.error("There was a problem with the fetch operation:", error);
@@ -284,8 +280,7 @@ export const fetchHealth = async (token) => {
       throw new Error(response.status);
     }
     const data = await response.json();
-    console.log(data.data);
-    return data.data; // Asegúrate de que 'data.data' es un array de usuarios
+    return data.data; 
   } catch (error) {
     console.error("There was a problem with the fetch operation:", error);
     throw error;
@@ -311,17 +306,12 @@ export const fetchDeviceByemail = async (token) => {
     }
 
     const data = await response.json();
-    console.log("Fetched data:", data); // Verifica los datos
-
-    // Extrae las plantas y la MAC de cada dispositivo
     const plants = data.data
       .map((device) => ({
         ...device.plant,
-        mac: device.mac, // Incluye la MAC en cada planta
+        mac: device.mac,
       }))
       .filter((plant) => plant);
-
-    console.log("Plants extracted:", plants); // Verifica las plantas extraídas
 
     return {
       plants,
@@ -352,7 +342,6 @@ export const fetchDeviceByMac = async (mac, token) => {
       throw new Error("Network response was not ok " + response.statusText);
     }
     const data = await response.json();
-    console.log("Fetched data by MAC:", data); // Verifica los datos
     return data.data;
   } catch (error) {
     console.error("There was a problem with the fetch operation:", error);
@@ -381,7 +370,6 @@ export const fetchDeleteDeviceByMac = async (mac, token) => {
 
     // Si es necesario, puedes analizar la respuesta
     const data = await response.json();
-    console.log("Device deleted successfully:", data); // Verifica la respuesta de la eliminación
 
     // Retorna la respuesta si necesitas manejarla más adelante
     return data;
@@ -412,8 +400,6 @@ export const fetchDeletePlantById = async (id, token) => {
 
     // Si es necesario, puedes analizar la respuesta
     const data = await response.json();
-    console.log("Device deleted successfully:", data); // Verifica la respuesta de la eliminación
-
     // Retorna la respuesta si necesitas manejarla más adelante
     return data;
   } catch (error) {

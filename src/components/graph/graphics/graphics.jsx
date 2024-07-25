@@ -13,7 +13,7 @@ export default function Graphics({ plantMac }) {
     // Función para cargar los registros
     const loadRecords = useCallback(() => {
       if (plantMac && !hasLoaded) {
-        console.log("Loading records for MAC:", plantMac);
+        
         loadPlantRecordsByMac(plantMac);
         setHasLoaded(true); // Marca como cargado para evitar peticiones repetidas
       }
@@ -21,7 +21,6 @@ export default function Graphics({ plantMac }) {
   
     // useEffect para cargar datos cuando cambie `plantMac`
     useEffect(() => {
-      console.log("Effect: plantMac or loadRecords changed");
       loadRecords();
     }, [loadRecords]);
   
@@ -31,7 +30,6 @@ export default function Graphics({ plantMac }) {
     }, [plantMac]);
   
     useEffect(() => {
-      console.log("Selected Plant Records updated:", selectedPlantRecords);
     }, [selectedPlantRecords]);
   
     const handleGraphClick = (graphType) => {
@@ -47,7 +45,6 @@ export default function Graphics({ plantMac }) {
       mq135: record.mq135,
     }));
   
-    console.log("Formatted Records:", formattedRecords);
   
     const scatterRecords = formattedRecords.map(record => ({
       humidity: record.humidity_earth,
