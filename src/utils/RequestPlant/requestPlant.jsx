@@ -1,7 +1,7 @@
 export const fetchPlants = async (token) => {
   try {
     const response = await fetch(
-      "https://PlantCareBack.integrador.xyz/api/plant",
+      "http://34.204.57.249:8081/api/plant",
       {
         method: "GET",
         headers: {
@@ -25,7 +25,7 @@ export const fetchPlants = async (token) => {
 export const fetchCategories = async (token) => {
   try {
     const response = await fetch(
-      "https://PlantCareBack.integrador.xyz/api/category",
+      "http://34.204.57.249:8081/api/category",
       {
         method: "GET",
         headers: {
@@ -48,7 +48,7 @@ export const fetchCategories = async (token) => {
 export const fetchTypes = async (token) => {
   try {
     const response = await fetch(
-      "https://PlantCareBack.integrador.xyz/api/typePlant",
+      "http://34.204.57.249:8081/api/typePlant",
       {
         method: "GET",
         headers: {
@@ -71,7 +71,7 @@ export const fetchTypes = async (token) => {
 export const fetchFamilies = async (token) => {
   try {
     const response = await fetch(
-      "https://PlantCareBack.integrador.xyz/api/family",
+      "http://34.204.57.249:8081/api/family",
       {
         method: "GET",
         headers: {
@@ -94,7 +94,7 @@ export const fetchFamilies = async (token) => {
 export const createPlant = async (plantData, token) => {
   try {
     const response = await fetch(
-      "https://PlantCareBack.integrador.xyz/api/plant",
+      "http://34.204.57.249:8081/api/plant",
       {
         method: "POST",
         headers: {
@@ -132,7 +132,7 @@ export const createPlant = async (plantData, token) => {
 export const createDevice = async (deviceData, token) => {
   try {
     const response = await fetch(
-      "https://PlantCareBack.integrador.xyz/api/device",
+      "http://34.204.57.249:8081/api/device",
       {
         method: "POST",
         headers: {
@@ -163,7 +163,7 @@ export const createDevice = async (deviceData, token) => {
 export const createUser = async (userData, token) => {
   try {
     const response = await fetch(
-      "https://PlantCareBack.integrador.xyz/api/users",
+      "http://34.204.57.249:8081/api/users",
       {
         method: "POST",
         headers: {
@@ -197,7 +197,7 @@ export const createUser = async (userData, token) => {
 export const fetchDevice = async (token) => {
   try {
     const response = await fetch(
-      "https://PlantCareBack.integrador.xyz/api/device",
+      "http://34.204.57.249:8081/api/device",
       {
         method: "GET",
         headers: {
@@ -221,7 +221,7 @@ export const fetchDevice = async (token) => {
 export const fetchUsers = async (token) => {
   try {
     const response = await fetch(
-      "https://PlantCareBack.integrador.xyz/api/users",
+      "http://34.204.57.249:8081/api/users",
       {
         method: "GET",
         headers: {
@@ -246,7 +246,7 @@ export const fetchUsers = async (token) => {
 export const fetchUserbyEmail = async (name,token) => {
   try {
     const response = await fetch(
-      `https://plantcareback.integrador.xyz/api/users/by-email/${name}`,
+      `http://34.204.57.249:8081/api/users/by-email/${name}`,
       {
         method: "GET",
         headers: {
@@ -271,7 +271,7 @@ export const fetchUserbyEmail = async (name,token) => {
 export const fetchHealth = async (token) => {
   try {
     const response = await fetch(
-      "https://PlantCareBack.integrador.xyz/api/health",
+      "http://34.204.57.249:8081/api/health",
       {
         method: "GET",
         headers: {
@@ -296,7 +296,7 @@ export const fetchDeviceByemail = async (token) => {
   try {
     const email = localStorage.getItem("userEmail");
     const response = await fetch(
-      `https://PlantCareBack.integrador.xyz/api/device/email?email=${email}`,
+      `http://34.204.57.249:8081/api/device/email?email=${email}`,
       {
         method: "GET",
         headers: {
@@ -339,7 +339,7 @@ export const fetchDeviceByemail = async (token) => {
 export const fetchDeviceByMac = async (mac, token) => {
   try {
     const response = await fetch(
-      `https://PlantCareBack.integrador.xyz/api/device/mac?macAddress=${mac}`,
+      `http://34.204.57.249:8081/api/device/mac?macAddress=${mac}`,
       {
         method: "GET",
         headers: {
@@ -364,7 +364,7 @@ export const fetchDeleteDeviceByMac = async (mac, token) => {
   try {
     // Cambia el método a DELETE
     const response = await fetch(
-      `https://PlantCareBack.integrador.xyz/api/device/mac?macAddress=${mac}`,
+      `http://34.204.57.249:8081/api/device/mac?macAddress=${mac}`,
       {
         method: "DELETE",
         headers: {
@@ -395,7 +395,7 @@ export const fetchDeletePlantById = async (id, token) => {
   try {
     // Cambia el método a DELETE
     const response = await fetch(
-      `https://PlantCareBack.integrador.xyz/api/plant/${id}`,
+      `http://34.204.57.249:8081/api/plant/${id}`,
       {
         method: "DELETE",
         headers: {
@@ -425,7 +425,7 @@ export const fetchDeletePlantById = async (id, token) => {
 export const fetchLogin = async (UserData) => {
   try {
     const response = await fetch(
-      "https://PlantCareBack.integrador.xyz/api/auth/authenticate",
+      "http://34.204.57.249:8081/api/auth/authenticate",
       {
         method: "POST",
         headers: {

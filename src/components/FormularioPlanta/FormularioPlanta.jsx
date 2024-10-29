@@ -78,7 +78,7 @@ const FormularioPlanta = forwardRef((props, ref) => {
       };
   
       try {
-        const response = await createPlant(plantData);
+        const response = await createPlant(plantData, token);
         console.log("Plant created successfully:", response);
         navigate("/"); // Navigate to the home page or another page
       } catch (error) {
