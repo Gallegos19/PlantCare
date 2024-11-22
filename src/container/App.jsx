@@ -19,6 +19,7 @@ import Data from '../components/stadisticalData/stadisticalData';
 import PlantRecordsContext from '../context/Context';
 import { PlantProvider } from '../components/PlantContext/plantContext';
 import { fetchHealth } from '../utils/RequestPlant/requestPlant';
+import Loader from '../components/Loader/Loader';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -48,7 +49,16 @@ function App() {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>; 
+    return <div style={{
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      height: "100vh",
+      width: "100vw"  
+    }}>
+      <Loader />
+    </div>
+    ; 
   }
 
   return (
