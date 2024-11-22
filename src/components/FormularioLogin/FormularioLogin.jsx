@@ -38,8 +38,12 @@ const FormularioLogin = forwardRef((props, ref) => {
 
           if (String(role) === 'user') {
             navigate('/');
+            navigate('/');
+
           } else if (String(role) === 'admin') {
             navigate('/admin');
+            navigate('/admin');
+
           } else {
             setAlertMessage('Rol desconocido.');
             setAlertOpen(true);

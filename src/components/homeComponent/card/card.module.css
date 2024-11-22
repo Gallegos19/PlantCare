@@ -29,7 +29,8 @@
 
 .image {
     width: 100%;
-    height: auto;
+    height: 150px;
+    border-radius: 5px;
 }
 
 .cardFooter {

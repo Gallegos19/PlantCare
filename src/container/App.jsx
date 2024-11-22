@@ -48,7 +48,7 @@ function App() {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>; // Puedes reemplazar esto con un componente de carga.
+    return <div>Loading...</div>; 
   }
 
   return (

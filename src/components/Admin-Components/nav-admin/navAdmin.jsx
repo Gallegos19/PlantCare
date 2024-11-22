@@ -5,22 +5,34 @@ import search from "../../../assets/google_web_search.png";
 import user from "../../../assets/male_user.png";
 import plus from "../../../assets/plus.png";
 import ProfileCard from "../../user/user";
+import { fetchUserbyEmail } from "../../../utils/RequestPlant/requestPlant";
 import { useNavigate } from "react-router-dom";
 import { RiCloseCircleFill } from "react-icons/ri";
 
 export default function NavAdmin() {
     const [showProfile, setShowProfile] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [name, setName] = useState('');
     const navigate = useNavigate();
     const emailU = localStorage.getItem('userEmail')
+    const token = localStorage.getItem('jwt')
+
 
     const toggleProfile = () => {
         setShowProfile(!showProfile);
+        handleUser();
     };
 
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
+        handleUser();
     };
+
+    const handleUser = async () => {
+        const user = await fetchUserbyEmail(emailU, token)
+        setName(user.name )
+
+    }
 
     return (
         <div>
@@ -63,7 +75,7 @@ export default function NavAdmin() {
                 {/* Contenedor del perfil en dispositivos móviles */}
                 {showProfile && (
                     <div className={style.profileContainerMovil}>
-                        <ProfileCard name="Nombre Completo" email={emailU}/>
+                        <ProfileCard name={' Hola '+name} email={emailU}/>
                     </div>
                 )}
                 <div className={style.user}>
@@ -74,7 +86,7 @@ export default function NavAdmin() {
             {/* Contenedor del perfil */}
             {showProfile && (
                 <div className={style.profileContainer}>
-                    <ProfileCard name="Nombre Completo" email={emailU}/>
+                    <ProfileCard name={' Hola '+name} email={emailU}/>
                 </div>
             )}
         </div>
